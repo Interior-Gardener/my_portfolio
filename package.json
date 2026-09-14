@@ -8,9 +8,11 @@
   },
   "scripts": {
     "setup:mediapipe": "node scripts/setup-mediapipe.mjs",
-    "predev": "npm run setup:mediapipe",
+    "check:resume-sync": "node scripts/check-resume-sync.mjs",
+    "resume:synced": "node scripts/check-resume-sync.mjs --mark-synced",
+    "predev": "npm run setup:mediapipe && npm run check:resume-sync",
     "dev": "astro dev",
-    "prebuild": "npm run setup:mediapipe",
+    "prebuild": "npm run setup:mediapipe && npm run check:resume-sync",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "check": "astro check"

@@ -44,12 +44,22 @@ The two Groq API keys were pasted into a chat conversation while building the si
 
 ## 2. Final content checks (5 minutes)
 
-Everything the site says lives in one file: `src/data/site.ts`. The home page, case studies, résumé page **and** the AI assistant's knowledge are all generated from it, so one edit updates everything.
+Everything the site says lives in one file: `src/data/site.ts`. The home page, case studies, résumé page **and** the AI assistant's knowledge are all generated from it, so one edit updates everything. **The reverse is not automatic**: `public/kartik-verma-resume.pdf` is a Word/Docs export you replace by hand, and nothing in the build parses it — see "Keeping the résumé and site.ts in sync" below.
 
-- [ ] **Claidroid dates.** The site shows `Dec 2024 – Jan 2025 · Jun 2025 – Jul 2025` (search for `Claidroid` in `site.ts`). Confirm or correct them.
+- [x] **Claidroid dates.** Corrected 2026-09-14 to `Jun 2025 – Jul 2025 · Dec 2025 – Jan 2026`, matching the PDF.
 - [ ] **Availability line.** `profile.availability` says "Open to software & ML internships".
-- [ ] **Résumé PDF.** `public/kartik-verma-resume.pdf` is the file visitors download. The current PDF still has "Dec **20205**", "Letter's of appreciations", and Claidroid dates that overlap JSW. Fix the PDF, export it again and replace the file with the same name.
+- [x] **Résumé PDF.** `public/kartik-verma-resume.pdf` replaced 2026-09-14; the "Dec 20205" and overlapping-dates typos are gone.
 - [ ] **Phone number.** The PDF includes your phone number; the web résumé intentionally does not. Remove it from the PDF if you don't want it public.
+
+### Keeping the résumé and site.ts in sync
+
+The PDF and `site.ts` are two separately hand-maintained documents — nothing auto-extracts one from the other, because a PDF has no reliable structure to parse and generating the PDF from code would take away the manual control over it. Instead, `npm run dev` and `npm run build` run a **drift check** (`scripts/check-resume-sync.mjs`) that hashes `public/kartik-verma-resume.pdf` and compares it against the hash recorded the last time someone confirmed `site.ts` was reviewed against it. If you replace the PDF, the next `npm run dev` prints a loud warning until you review `site.ts` (experience dates/bullets, education, `resumeSkills`, `recognition`) against the new PDF and run:
+
+```bash
+npm run resume:synced
+```
+
+That records the new PDF's hash so the warning clears. It's a reminder, not magic — it can't tell you *what* changed, only *that* the file did, so re-read both side by side (or hand the new PDF to Claude and ask it to diff and update `site.ts`) before marking it synced.
 
 ---
 
