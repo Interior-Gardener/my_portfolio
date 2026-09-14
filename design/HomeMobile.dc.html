@@ -1,0 +1,202 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300..700&amp;family=Geist+Mono:wght@400;500&amp;family=Instrument+Serif:ital@0;1&amp;display=swap">
+  <style>
+    body { margin: 0; background: #F6F3ED; }
+    .page { --bg: #F6F3ED; --surface: #ECE7DD; --ink: #17150F; --muted: #6A655A; --rule: #D9D2C4; --accent: #B8553A; background: var(--bg); color: var(--ink); font-family: 'Geist', ui-sans-serif, system-ui, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; }
+    .page * { box-sizing: border-box; }
+    .serif { font-family: 'Instrument Serif', 'Iowan Old Style', Georgia, serif; font-weight: 400; }
+    .mono { font-family: 'Geist Mono', ui-monospace, Consolas, monospace; }
+    a { color: var(--ink); text-decoration: none; }
+    a:hover { color: var(--accent); }
+    @keyframes rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+    .reveal { animation: rise 900ms cubic-bezier(.16,.84,.24,1) both; }
+    @media (prefers-reduced-motion: reduce) { .reveal { animation: none; } }
+  </style>
+</helmet>
+<div class="page" style="--bg: {{t.bg}}; --surface: {{t.surface}}; --ink: {{t.ink}}; --muted: {{t.muted}}; --rule: {{t.rule}}; --accent: {{accent}}; position: relative; width: 390px; min-height: 4500px; overflow: hidden;">
+
+  <header style="display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid var(--rule);">
+    <a href="#" class="serif" style="font-size: 22px;">Kartik Verma</a>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <div style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid var(--rule);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4A8 8 0 1 0 20 14.5Z"></path></svg>
+      </div>
+      <div style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid var(--rule);">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M4 9H20"></path><path d="M4 15H20"></path></svg>
+      </div>
+    </div>
+  </header>
+
+  <section style="padding: 48px 20px 56px;">
+    <div class="mono reveal" style="display: flex; flex-direction: column; gap: 6px; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);">
+      <span>Mumbai, India · Class of 2027</span>
+      <span>Computer Engineering, Honours AI/ML</span>
+    </div>
+    <h1 class="serif" style="margin: 28px 0 0; font-size: 64px; line-height: 0.95; letter-spacing: -0.03em; font-weight: 400;">
+      <span class="reveal" style="display: block; animation-delay: 120ms;">I build software you can <em style="font-style: italic; color: var(--accent);">touch</em>.</span>
+    </h1>
+    <p class="reveal" style="margin: 24px 0 0; font-size: 17px; line-height: 1.55; color: var(--muted); text-wrap: pretty; animation-delay: 240ms;">Gesture-controlled globes, VR chemistry labs and machine-learning systems for hospitals — engineered end to end, with numbers to show for it.</p>
+    <div class="reveal" style="display: flex; flex-direction: column; gap: 12px; margin-top: 32px; animation-delay: 360ms;">
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 14px;">
+        <span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent);"></span>
+        <span>Open to SWE and ML internships</span>
+      </div>
+      <a href="#" style="display: flex; align-items: center; justify-content: center; gap: 10px; height: 52px; background: var(--ink); color: var(--bg); font-size: 15px; font-weight: 500;">See selected work
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3V13"></path><path d="M4 9L8 13L12 9"></path></svg>
+      </a>
+      <a href="#" style="display: flex; align-items: center; justify-content: center; height: 52px; border: 1px solid var(--ink); font-size: 15px; font-weight: 500;">Download résumé</a>
+      <div style="display: flex; align-items: center; gap: 10px; min-height: 44px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 12V6.5a1.5 1.5 0 0 1 3 0V11"></path><path d="M11 10.5V5a1.5 1.5 0 0 1 3 0v5.5"></path><path d="M14 10.5V6.5a1.5 1.5 0 0 1 3 0V12"></path><path d="M17 11a1.5 1.5 0 0 1 3 0v3.5a6.5 6.5 0 0 1-6.5 6.5h-1a6.5 6.5 0 0 1-5.2-2.6L4.4 15a1.5 1.5 0 0 1 2.4-1.8L8 14.5"></path></svg>
+        <a href="#" style="font-size: 15px; text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--accent);">Try Gesture Mode</a>
+        <span class="mono" style="font-size: 11px; color: var(--muted);">on-device</span>
+      </div>
+    </div>
+  </section>
+
+  <div style="position: absolute; top: 760px; right: 16px; display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: var(--ink); color: var(--bg); box-shadow: 0 12px 30px rgba(20, 16, 10, 0.25);">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M4 5H20V16H10L5 20V16H4Z"></path></svg>
+  </div>
+
+  <section style="padding: 0 20px;">
+    <div style="display: flex; flex-direction: column; border-top: 1px solid var(--rule);">
+      <div style="display: flex; align-items: baseline; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--rule);">
+        <span class="serif" style="width: 88px; font-size: 44px; line-height: 1;">2</span>
+        <div style="display: flex; flex-direction: column; gap: 4px;"><span class="mono" style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;">Competition podiums</span><span style="font-size: 13px; color: var(--muted);">IET Intech winner · AI-Robo runner-up</span></div>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--rule);">
+        <span class="serif" style="width: 88px; font-size: 44px; line-height: 1;">3</span>
+        <div style="display: flex; flex-direction: column; gap: 4px;"><span class="mono" style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;">Internships</span><span style="font-size: 13px; color: var(--muted);">JSW Steel · Claidroid · Central Railway</span></div>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--rule);">
+        <span class="serif" style="width: 88px; font-size: 44px; line-height: 1;">9.04</span>
+        <div style="display: flex; flex-direction: column; gap: 4px;"><span class="mono" style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;">CGPA</span><span style="font-size: 13px; color: var(--muted);">Honours AI/ML</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 88px 20px 0;">
+    <div style="display: flex; align-items: baseline; gap: 14px; padding-bottom: 20px; border-bottom: 1px solid var(--ink);">
+      <span class="mono" style="font-size: 12px; color: var(--accent);">01</span>
+      <h2 class="serif" style="margin: 0; font-size: 44px; line-height: 1; letter-spacing: -0.02em; font-weight: 400;">Selected work</h2>
+    </div>
+
+    <article style="display: flex; flex-direction: column; gap: 16px; padding: 32px 0 40px; border-bottom: 1px solid var(--rule);">
+      <div style="padding: 10px; background: var(--surface); border: 1px solid var(--rule);">
+        <img src="geoswipe-globe.jpg" alt="GeoSwipe's 3D globe" style="display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover;">
+      </div>
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);">2025 – 26 · Full-stack · CV · AI</span>
+      <h3 class="serif" style="margin: 0; font-size: 44px; line-height: 1; font-weight: 400;">GeoSwipe</h3>
+      <p style="margin: 0; font-size: 16px; line-height: 1.5;">A heritage-exploration globe you steer with your bare hands.</p>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding-top: 14px; border-top: 1px solid var(--rule);">
+        <div style="display: flex; flex-direction: column; gap: 4px;"><span class="serif" style="font-size: 26px; line-height: 1;">126</span><span class="mono" style="font-size: 10px; text-transform: uppercase; color: var(--muted);">Heritage sites</span></div>
+        <div style="display: flex; flex-direction: column; gap: 4px;"><span class="serif" style="font-size: 26px; line-height: 1;">9</span><span class="mono" style="font-size: 10px; text-transform: uppercase; color: var(--muted);">Gestures</span></div>
+        <div style="display: flex; flex-direction: column; gap: 4px;"><span class="serif" style="font-size: 26px; line-height: 1;">2 ms</span><span class="mono" style="font-size: 10px; text-transform: uppercase; color: var(--muted);">Was 8.7 s</span></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 13px;">
+        <span style="width: 8px; height: 8px; background: var(--accent);"></span>
+        <span>Runner-up, AI-Robo Festival 2026</span>
+      </div>
+      <a href="#" style="display: flex; align-items: center; justify-content: space-between; height: 48px; padding: 0 16px; border: 1px solid var(--ink); font-size: 15px; font-weight: 500;">Read case study
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8H13"></path><path d="M9 4L13 8L9 12"></path></svg>
+      </a>
+    </article>
+
+    <article style="display: flex; flex-direction: column; gap: 16px; padding: 32px 0 40px; border-bottom: 1px solid var(--rule);">
+      <div style="padding: 10px; background: var(--surface); border: 1px solid var(--rule);">
+        <img src="atomix-lab.jpg" alt="Atomix virtual chemistry lab" style="display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover;">
+      </div>
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);">2026 · Unity · VR · AI</span>
+      <h3 class="serif" style="margin: 0; font-size: 44px; line-height: 1; font-weight: 400;">Atomix</h3>
+      <p style="margin: 0; font-size: 16px; line-height: 1.5;">A VR chemistry lab where students can get it wrong safely — with an AI tutor that knows exactly why.</p>
+      <div style="display: flex; align-items: center; gap: 10px; font-size: 13px;">
+        <span style="width: 8px; height: 8px; background: var(--accent);"></span>
+        <span>Winner, IET Intech 2k26 (National)</span>
+      </div>
+      <a href="#" style="display: flex; align-items: center; justify-content: space-between; height: 48px; padding: 0 16px; border: 1px solid var(--ink); font-size: 15px; font-weight: 500;">Read case study
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8H13"></path><path d="M9 4L13 8L9 12"></path></svg>
+      </a>
+    </article>
+
+    <article style="display: flex; flex-direction: column; gap: 16px; padding: 32px 0 40px; border-bottom: 1px solid var(--rule);">
+      <div style="padding: 10px; background: var(--surface); border: 1px solid var(--rule);">
+        <img src="hospital-inventory.jpg" alt="Hospital Operations Sync Platform inventory predictions" style="display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: left top;">
+      </div>
+      <span class="mono" style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);">2026 · Full-stack · ML</span>
+      <h3 class="serif" style="margin: 0; font-size: 44px; line-height: 1; font-weight: 400;">Hospital Ops Sync</h3>
+      <p style="margin: 0; font-size: 16px; line-height: 1.5;">One live view of a hospital's beds, queues and stock — with models that forecast what runs out next.</p>
+      <a href="#" style="display: flex; align-items: center; justify-content: space-between; height: 48px; padding: 0 16px; border: 1px solid var(--ink); font-size: 15px; font-weight: 500;">Read case study
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8H13"></path><path d="M9 4L13 8L9 12"></path></svg>
+      </a>
+    </article>
+  </section>
+
+  <section style="padding: 88px 20px 0;">
+    <div style="display: flex; align-items: baseline; gap: 14px; padding-bottom: 20px; border-bottom: 1px solid var(--ink);">
+      <span class="mono" style="font-size: 12px; color: var(--accent);">03</span>
+      <h2 class="serif" style="margin: 0; font-size: 44px; line-height: 1; letter-spacing: -0.02em; font-weight: 400;">Experience</h2>
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 24px 0; border-bottom: 1px solid var(--rule);">
+        <span class="mono" style="font-size: 12px; color: var(--muted);">Jun – Jul 2025</span>
+        <span class="serif" style="font-size: 28px; line-height: 1.1;">JSW Steel</span>
+        <span style="font-size: 14px; color: var(--muted);">Software Developer Intern · On-site</span>
+        <p style="margin: 6px 0 0; font-size: 15px; line-height: 1.55;">Digitised a roll-shop asset lifecycle: 42 routes, a 17-state workflow, 12 Oracle tables.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 24px 0; border-bottom: 1px solid var(--rule);">
+        <span class="mono" style="font-size: 12px; color: var(--muted);">[Two stints — dates]</span>
+        <span class="serif" style="font-size: 28px; line-height: 1.1;">Claidroid Technologies</span>
+        <span style="font-size: 14px; color: var(--muted);">Machine Learning Intern · Remote</span>
+        <p style="margin: 6px 0 0; font-size: 15px; line-height: 1.55;">A 75-intent NLP chatbot (92.7% accuracy) and a readmission-risk model (88.9% AUC-ROC).</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px; padding: 24px 0; border-bottom: 1px solid var(--rule);">
+        <span class="mono" style="font-size: 12px; color: var(--muted);">Jul – Aug 2024</span>
+        <span class="serif" style="font-size: 28px; line-height: 1.1;">Central Railway</span>
+        <span style="font-size: 14px; color: var(--muted);">Technical Intern · On-site</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding: 112px 20px 0;">
+    <span class="mono" style="font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted);">Contact</span>
+    <h2 class="serif" style="margin: 16px 0 0; font-size: 64px; line-height: 0.95; letter-spacing: -0.03em; font-weight: 400;">Let's build <em style="font-style: italic; color: var(--accent);">something</em>.</h2>
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 32px; padding: 14px 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);">
+      <a href="#" style="font-size: 17px; font-weight: 500;">kartikverma2204@gmail.com</a>
+      <div style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid var(--rule);">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="1.5"></rect><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"></path></svg>
+      </div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin-top: 8px; font-size: 15px; font-weight: 500;">
+      <a href="#" style="display: flex; align-items: center; min-height: 48px;">GitHub</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 48px;">LinkedIn</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 48px;">LeetCode</a>
+      <a href="#" style="display: flex; align-items: center; min-height: 48px;">Résumé</a>
+    </div>
+    <p class="mono" style="margin: 24px 0 0; font-size: 12px; color: var(--muted);">Liked a project? <a href="#" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--accent);">Buy me a coffee</a></p>
+  </section>
+
+  <footer class="mono" style="display: flex; flex-direction: column; gap: 8px; margin: 72px 20px 0; padding: 24px 0 40px; border-top: 1px solid var(--rule); font-size: 11px; color: var(--muted);">
+    <span>© 2026 Kartik Verma</span>
+    <span>Designed and engineered in Mumbai</span>
+  </footer>
+
+</div>
+</x-dc>
+<script data-dc-script data-props='{"accent":{"editor":"color","default":"#B8553A","options":["#B8553A","#4A66C4","#3A8050"],"section":"Theme"},"dark":{"editor":"boolean","default":false,"section":"Theme"}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const light = { bg: '#F6F3ED', surface: '#ECE7DD', ink: '#17150F', muted: '#6A655A', rule: '#D9D2C4' };
+    const night = { bg: '#12110E', surface: '#1C1B17', ink: '#EDE9E0', muted: '#9E998D', rule: '#302E28' };
+    return { t: (this.props.dark ?? false) ? night : light, accent: this.props.accent ?? '#B8553A' };
+  }
+}
+</script>
+</body>
+</html>
