@@ -14,8 +14,6 @@ dist/
 public/mediapipe/wasm/
 
 # raw source material (optimised copies live in src/assets and public)
-/raw data/
-/tech stack icons/
 design/*.html
 design/img/
 
