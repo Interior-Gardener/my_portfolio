@@ -1,0 +1,41 @@
+---
+import Base from "../layouts/Base.astro";
+import Hero from "../components/Hero.astro";
+import Marquee from "../components/Marquee.astro";
+import Work from "../components/Work.astro";
+import SideProjects from "../components/SideProjects.astro";
+import Skills from "../components/Skills.astro";
+import Experience from "../components/Experience.astro";
+import Recognition from "../components/Recognition.astro";
+import ResumePreview from "../components/ResumePreview.astro";
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import { education, profile, skillGroups } from "../data/site";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  jobTitle: "Software Engineer",
+  description: profile.description,
+  email: `mailto:${profile.email}`,
+  url: Astro.site?.href,
+  address: { "@type": "PostalAddress", addressLocality: "Mumbai", addressCountry: "IN" },
+  alumniOf: { "@type": "CollegeOrUniversity", name: education.school },
+  sameAs: [profile.links.github, profile.links.linkedin, profile.links.leetcode],
+  knowsAbout: skillGroups.flatMap((group) => group.skills.filter((skill) => skill.projects.length > 0).map((skill) => skill.name)),
+};
+---
+
+<Base navMode="home" jsonLd={jsonLd}>
+  <Hero />
+  <Marquee />
+  <Work />
+  <SideProjects />
+  <Skills />
+  <Experience />
+  <Recognition />
+  <ResumePreview />
+  <About />
+  <Contact />
+</Base>

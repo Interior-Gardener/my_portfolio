@@ -1,0 +1,21 @@
+---
+import Icon from "./Icon.astro";
+import { recognition } from "../data/site";
+
+const items = recognition.map((item) => (item.project ? `${item.title} · ${item.project}` : `${item.title} · ${item.detail}`));
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee__track">
+    {[0, 1].map(() => (
+      <ul class="marquee__group">
+        {items.map((item) => (
+          <li>
+            <Icon name="star" size={14} class="marquee__star" />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    ))}
+  </div>
+</div>

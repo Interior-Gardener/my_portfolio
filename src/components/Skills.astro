@@ -1,0 +1,80 @@
+---
+import Icon from "./Icon.astro";
+import SectionHead from "./SectionHead.astro";
+import { projects, sideProjects, skillGroups } from "../data/site";
+
+const allSkills = skillGroups.flatMap((group) => group.skills);
+const skillsFor = (id: string) =>
+  allSkills
+    .filter((skill) => skill.projects.includes(id))
+    .map((skill) => skill.id)
+    .join(" ");
+
+const items = [
+  ...projects.map((project) => ({
+    id: project.slug,
+    name: project.name,
+    note: "Case study",
+    href: `/work/${project.slug}`,
+    external: false,
+  })),
+  ...sideProjects.map((project) => ({
+    id: project.id,
+    name: project.name,
+    note: project.context,
+    href: project.link?.href ?? "#more-projects",
+    external: Boolean(project.link),
+  })),
+];
+---
+
+<section class="section" id="skills" aria-labelledby="skills-title">
+  <div class="shell">
+    <SectionHead
+      index="03"
+      eyebrow="Toolbox"
+      id="skills-title"
+      title="Skills, with receipts"
+      lede="Pick any skill to see exactly where I've used it in shipped work."
+    />
+
+    <div class="skills" data-skills>
+      <div class="skills__groups">
+        {skillGroups.map((group, index) => (
+          <div class="skill-group" data-reveal style={`--d:${index}`}>
+            <h3 class="eyebrow">{group.title}</h3>
+            <div class="skill-chips">
+              {group.skills.map((skill) => (
+                <button type="button" class="skill-chip" data-skill={skill.id} data-skill-name={skill.name} aria-pressed="false">
+                  <span>{skill.name}</span>
+                  {skill.projects.length > 0 && <span class="skill-chip__count" aria-label={`${skill.projects.length} projects`}>{skill.projects.length}</span>}
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <aside class="skill-results panel" aria-live="polite">
+        <div class="skill-results__head">
+          <h3 data-skill-heading>Everything shipped, across every skill</h3>
+          <button type="button" class="link-btn" data-skill-clear hidden>Clear</button>
+        </div>
+        <ul class="skill-results__list">
+          {items.map((item) => (
+            <li data-skill-item data-skills={skillsFor(item.id)}>
+              <a href={item.href} target={item.external ? "_blank" : undefined} rel={item.external ? "noopener noreferrer" : undefined}>
+                <span class="skill-results__text">
+                  <span class="skill-results__name">{item.name}</span>
+                  <span class="skill-results__note">{item.note}</span>
+                </span>
+                <Icon name={item.external ? "arrow-up-right" : "arrow-right"} />
+              </a>
+            </li>
+          ))}
+        </ul>
+        <p class="skill-results__empty" data-skill-empty hidden>I use this in coursework and practice rather than in a featured project.</p>
+      </aside>
+    </div>
+  </div>
+</section>

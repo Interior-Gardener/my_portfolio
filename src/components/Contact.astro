@@ -1,0 +1,65 @@
+---
+import Icon from "./Icon.astro";
+import { profile } from "../data/site";
+
+const profiles = [
+  { label: "GitHub", detail: "Interior-Gardener", href: profile.links.github, icon: "branch" as const },
+  { label: "LinkedIn", detail: "kartikverma2204", href: profile.links.linkedin, icon: "briefcase" as const },
+  { label: "LeetCode", detail: "SUPER_VERMA", href: profile.links.leetcode, icon: "code" as const },
+];
+---
+
+<section class="section contact" id="contact" aria-labelledby="contact-title">
+  <div class="shell">
+    <p class="section-index" data-reveal><span>08</span><span>Contact</span></p>
+    <h2 class="contact__title" id="contact-title" data-reveal style="--d:1">
+      Have something <span class="mark">worth building?</span>
+    </h2>
+    <p class="section-lede contact__lede" data-reveal style="--d:2">
+      I'm looking for software engineering and machine-learning internships. Email is the fastest way to reach me.
+    </p>
+
+    <div class="contact__email" data-reveal style="--d:3">
+      <a class="contact__address" href={`mailto:${profile.email}`}>{profile.email}</a>
+      <button type="button" class="icon-btn icon-btn--lg" data-copy={profile.email} aria-label="Copy email address" title="Copy email">
+        <Icon name="copy" />
+      </button>
+    </div>
+
+    <div class="contact__grid">
+      <ul class="contact__links">
+        {profiles.map((item, index) => (
+          <li data-reveal style={`--d:${index}`}>
+            <a class="contact-link panel" href={item.href} target="_blank" rel="noopener noreferrer">
+              <span class="contact-link__icon"><Icon name={item.icon} /></span>
+              <span class="contact-link__text">
+                <span class="contact-link__label">{item.label}</span>
+                <span class="contact-link__detail">{item.detail}</span>
+              </span>
+              <Icon name="arrow-up-right" class="contact-link__arrow" />
+            </a>
+          </li>
+        ))}
+        <li data-reveal style="--d:3">
+          <a class="contact-link panel" href={profile.links.resumePdf} download="Kartik-Verma-Resume.pdf">
+            <span class="contact-link__icon"><Icon name="download" /></span>
+            <span class="contact-link__text">
+              <span class="contact-link__label">Résumé</span>
+              <span class="contact-link__detail">Download the PDF</span>
+            </span>
+            <Icon name="arrow-down" class="contact-link__arrow" />
+          </a>
+        </li>
+      </ul>
+
+      <aside class="coffee panel" data-reveal style="--d:2">
+        <span class="coffee__icon"><Icon name="coffee" size={26} /></span>
+        <h3 class="coffee__title">Enjoyed looking around?</h3>
+        <p class="coffee__text">If a project or case study helped you, you can buy me a coffee. It keeps the late-night builds going.</p>
+        <a class="btn btn--signal" href={profile.links.coffee} target="_blank" rel="noopener noreferrer">
+          Buy me a coffee <Icon name="arrow-up-right" />
+        </a>
+      </aside>
+    </div>
+  </div>
+</section>

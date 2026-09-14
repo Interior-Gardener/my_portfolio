@@ -1,0 +1,44 @@
+---
+import Icon from "./Icon.astro";
+import { education, experience, profile, projects } from "../data/site";
+
+const jsw = experience[0]!;
+const claidroid = experience[1]!;
+const geoswipe = projects[0]!;
+---
+
+<section class="section" id="resume" aria-labelledby="resume-title">
+  <div class="shell resume-cta">
+    <div class="resume-cta__text">
+      <p class="section-index" data-reveal><span>06</span><span>Résumé</span></p>
+      <h2 class="section-title" id="resume-title" data-reveal style="--d:1">The one-page version</h2>
+      <p class="section-lede" data-reveal style="--d:2">
+        Everything on this site, condensed the way recruiters like it. Read it right here, download the PDF, or have the assistant summarise it for you.
+      </p>
+      <div class="resume-cta__actions" data-reveal style="--d:3">
+        <a class="btn btn--ink" href="/resume">Read résumé <Icon name="arrow-right" class="arrow" /></a>
+        <a class="btn btn--ghost" href={profile.links.resumePdf} download="Kartik-Verma-Resume.pdf"><Icon name="download" />Download PDF</a>
+        <button type="button" class="btn btn--ghost" data-ask-open data-ask-prompt="Summarise Kartik's résumé in five bullet points."><Icon name="spark" />Summarise with AI</button>
+      </div>
+    </div>
+
+    <a class="paper-wrap" href="/resume" aria-label="Open the full résumé" data-reveal style="--d:2">
+      <div class="paper" aria-hidden="true">
+        <p class="paper__name">{profile.name}</p>
+        <p class="paper__contact">{profile.location} · {profile.email}</p>
+        <p class="paper__heading">Education</p>
+        <div class="paper__row"><strong>{education.school}</strong><span>{education.dates}</span></div>
+        <p>{education.degree}, {education.honours} · CGPA {education.cgpa}</p>
+        <p class="paper__heading">Experience</p>
+        <div class="paper__row"><strong>{jsw.role} · {jsw.company}</strong><span>{jsw.dates}</span></div>
+        <ul>{jsw.bullets.map((bullet) => <li>{bullet}</li>)}</ul>
+        <div class="paper__row"><strong>{claidroid.role} · {claidroid.company}</strong><span>Two internships</span></div>
+        <ul>{claidroid.bullets.map((bullet) => <li>{bullet}</li>)}</ul>
+        <p class="paper__heading">Projects</p>
+        <div class="paper__row"><strong>{geoswipe.name}</strong><span>{geoswipe.year}</span></div>
+        <ul>{geoswipe.resumeBullets.map((bullet) => <li>{bullet}</li>)}</ul>
+      </div>
+      <span class="paper-wrap__cta"><Icon name="expand" size={16} />Open full résumé</span>
+    </a>
+  </div>
+</section>

@@ -1,0 +1,115 @@
+---
+import { Image, getImage } from "astro:assets";
+import Icon from "./Icon.astro";
+import SectionHead from "./SectionHead.astro";
+import { education, experience, profile } from "../data/site";
+import { logos, photos } from "../lib/media";
+
+const jswPhotos = await Promise.all(
+  [photos.atJsw, photos.jswTeam].map(async (photo) => ({
+    ...photo,
+    full: await getImage({ src: photo.src, width: 1800, format: "webp" }),
+  })),
+);
+---
+
+<section class="section" id="experience" aria-labelledby="experience-title">
+  <div class="shell">
+    <SectionHead
+      index="04"
+      eyebrow="Experience"
+      id="experience-title"
+      title="Where I've shipped"
+      lede="Three internships across heavy industry, machine learning and public infrastructure."
+    />
+
+    <div class="timeline" data-timeline>
+      <span class="timeline__progress" aria-hidden="true"></span>
+      <ol class="timeline__list">
+        {experience.map((job) => {
+          const logo = logos[job.id];
+          return (
+            <li class="xp" data-reveal>
+              <div class="xp__meta">
+                <div class="xp__logo">
+                  {logo ? <Image src={logo} alt={`${job.company} logo`} width={160} /> : <span class="xp__logo-letter">{job.company.charAt(0)}</span>}
+                </div>
+                <p class="xp__dates">{job.dates}</p>
+                <h3 class="xp__company">{job.company}</h3>
+                <p class="xp__role">{job.role}</p>
+                <span class="chip">{job.mode}</span>
+              </div>
+
+              <div class="xp__body">
+                <p class="xp__summary">{job.summary}</p>
+                {job.stints ? (
+                  <div class="xp__stints">
+                    {job.stints.map((stint, index) => (
+                      <article class="stint">
+                        <p class="eyebrow">Internship {index + 1}</p>
+                        <h4 class="stint__title">{stint.title}</h4>
+                        <p class="stint__summary">{stint.summary}</p>
+                        <dl class="stint__metrics">
+                          {stint.metrics.map((metric) => (
+                            <div>
+                              <dt>{metric.label}</dt>
+                              <dd>{metric.value}</dd>
+                            </div>
+                          ))}
+                        </dl>
+                      </article>
+                    ))}
+                  </div>
+                ) : (
+                  <ul class="xp__bullets">
+                    {job.bullets.map((bullet) => <li>{bullet}</li>)}
+                  </ul>
+                )}
+                {job.stack.length > 0 && (
+                  <ul class="chips" aria-label="Tools used">
+                    {job.stack.map((item) => <li class="chip">{item}</li>)}
+                  </ul>
+                )}
+                {job.id === "jsw" && (
+                  <div class="xp__photos">
+                    {jswPhotos.map((photo) => (
+                      <a class="photo-thumb" href={photo.full.src} data-lightbox-trigger data-alt={photo.alt} data-caption={photo.caption}>
+                        <Image src={photo.src} alt={photo.alt} widths={[280, 560]} sizes="280px" />
+                        <span class="photo-thumb__zoom" aria-hidden="true"><Icon name="expand" size={14} /></span>
+                      </a>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </li>
+          );
+        })}
+      </ol>
+    </div>
+
+    <article class="edu panel" data-reveal>
+      <div class="edu__logo">
+        <Image src={logos.somaiya!} alt="Somaiya Vidyavihar logo" width={160} />
+      </div>
+      <div class="edu__main">
+        <p class="eyebrow"><Icon name="graduation" size={14} /> Education · {education.dates}</p>
+        <h3 class="edu__school">{education.school}</h3>
+        <p class="edu__degree">{education.degree} · {education.honours}</p>
+        <p class="edu__affiliation">Affiliated to the {education.affiliation}</p>
+        <ul class="chips" aria-label="Key courses">
+          {education.courses.map((course) => <li class="chip">{course}</li>)}
+        </ul>
+      </div>
+      <div class="edu__cgpa">
+        <span class="edu__cgpa-value" data-count={education.cgpa}>{education.cgpa}</span>
+        <span class="eyebrow">{education.cgpaNote}</span>
+      </div>
+    </article>
+
+    <p class="xp-certificates" data-reveal>
+      <a class="link-arrow" href={profile.links.experienceCertificates} target="_blank" rel="noopener noreferrer">
+        View internship certificates <Icon name="arrow-up-right" />
+      </a>
+    </p>
+  </div>
+</section>

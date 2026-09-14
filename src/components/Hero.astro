@@ -1,0 +1,49 @@
+---
+import Icon from "./Icon.astro";
+import { highlights, profile } from "../data/site";
+
+const phrases = [
+  "globes you steer by hand.",
+  "chemistry labs you can't blow up.",
+  "hospital systems that see shortages coming.",
+  "models that explain their predictions.",
+];
+const firstName = [..."Kartik"];
+const lastName = [..."Verma"];
+---
+
+<section class="hero shell" aria-labelledby="hero-title">
+  <div class="hero__top enter">
+    <span class="status-pill"><span class="pulse-dot" aria-hidden="true"></span>{profile.availability}</span>
+    <span class="hero__place"><Icon name="pin" size={14} />{profile.location} · <span data-clock>--:--</span> IST</span>
+  </div>
+
+  <h1 class="kinetic" id="hero-title" data-kinetic aria-label={profile.name}>
+    <span class="k-line" aria-hidden="true">{firstName.map((char) => <span class="k-char">{char}</span>)}</span>
+    <span class="k-line k-line--offset" aria-hidden="true">{lastName.map((char) => <span class="k-char">{char}</span>)}</span>
+  </h1>
+
+  <div class="hero__below">
+    <p class="hero__lede enter" style="--d:2">
+      <span class="hero__lede-lead">Computer engineer. I build</span>
+      <span class="rotator" data-rotator aria-hidden="true">
+        {phrases.map((phrase, index) => <span class:list={["rotator__item", { "is-active": index === 0 }]}><span class="mark">{phrase}</span></span>)}
+      </span>
+      <span class="visually-hidden">{phrases.join(" ")}</span>
+    </p>
+    <div class="hero__actions enter" style="--d:3">
+      <a class="btn btn--ink" href="#work">See my work <Icon name="arrow-down" class="arrow-down" /></a>
+      <a class="btn btn--ghost" href="/resume"><Icon name="file" />Read résumé</a>
+      <button type="button" class="btn btn--ghost" data-ask-open><Icon name="spark" />Ask AI</button>
+    </div>
+  </div>
+
+  <ul class="hero__tiles" aria-label="At a glance">
+    {highlights.map((item, index) => (
+      <li class="tile enter" style={`--d:${index + 4}`}>
+        <span class="tile__value">{item.count ? <span data-count={item.count}>{item.value}</span> : item.value}</span>
+        <span class="tile__label">{item.label}</span>
+      </li>
+    ))}
+  </ul>
+</section>

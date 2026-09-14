@@ -1,0 +1,73 @@
+---
+import { Image, getImage } from "astro:assets";
+import Icon from "./Icon.astro";
+import SectionHead from "./SectionHead.astro";
+import { profile, recognition } from "../data/site";
+import { photos } from "../lib/media";
+
+const ciiaFull = await getImage({ src: photos.ciia.src, width: 2000, format: "webp" });
+const find = (id: string) => recognition.find((item) => item.id === id)!;
+const iet = find("iet");
+const ciia = find("ciia");
+const smallCards = [
+  { item: find("airobo"), icon: "award" as const },
+  { item: find("aws"), icon: "shield" as const },
+  { item: find("aiu"), icon: "racket" as const },
+  { item: find("letters"), icon: "file" as const },
+];
+---
+
+<section class="section" id="recognition" aria-labelledby="recognition-title">
+  <div class="shell">
+    <SectionHead
+      index="05"
+      eyebrow="Recognition"
+      id="recognition-title"
+      title="On national stages"
+      lede="A national win, a national showcase, a podium, and a university squash court."
+    />
+
+    <div class="awards">
+      <article class="award-feature" data-reveal>
+        <div class="award-feature__top">
+          <span class="award-feature__icon"><Icon name="trophy" size={26} /></span>
+          <span class="award-feature__year">{iet.year}</span>
+        </div>
+        <p class="award-feature__big">Winner</p>
+        <div class="award-feature__text">
+          <h3>IET Intech 2k26</h3>
+          <p>{iet.detail} · {iet.project}</p>
+        </div>
+        <a class="btn btn--dark" href="/work/atomix">Explore Atomix <Icon name="arrow-right" class="arrow" /></a>
+      </article>
+
+      <figure class="award-photo panel" data-reveal style="--d:1">
+        <a class="award-photo__link" href={ciiaFull.src} data-lightbox-trigger data-alt={photos.ciia.alt} data-caption={photos.ciia.caption}>
+          <Image src={photos.ciia.src} alt={photos.ciia.alt} widths={[640, 960, 1400]} sizes="(max-width: 960px) 92vw, 58vw" />
+          <span class="award-photo__zoom"><Icon name="expand" size={16} /><span>View full photo</span></span>
+        </a>
+        <figcaption class="award-photo__caption">
+          <span class="eyebrow">{ciia.title} · {ciia.year}</span>
+          <strong>GeoSwipe, exhibited at {ciia.detail}</strong>
+        </figcaption>
+      </figure>
+
+      {smallCards.map(({ item, icon }, index) => (
+        <article class="award-card panel" data-reveal style={`--d:${index}`}>
+          <span class="award-card__icon"><Icon name={icon} size={20} /></span>
+          <div>
+            <h3 class="award-card__title">{item.title}</h3>
+            <p class="award-card__detail">{item.detail}{item.project ? ` · ${item.project}` : ""}</p>
+          </div>
+          <span class="award-card__year">{item.year}</span>
+        </article>
+      ))}
+    </div>
+
+    <p class="xp-certificates" data-reveal>
+      <a class="link-arrow" href={profile.links.skillCertificates} target="_blank" rel="noopener noreferrer">
+        View certificates <Icon name="arrow-up-right" />
+      </a>
+    </p>
+  </div>
+</section>

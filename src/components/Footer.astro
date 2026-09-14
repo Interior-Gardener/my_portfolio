@@ -1,0 +1,36 @@
+---
+import Icon from "./Icon.astro";
+import { profile } from "../data/site";
+
+const year = new Date().getFullYear();
+const links = [
+  { href: "/#work", label: "Work" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#recognition", label: "Recognition" },
+  { href: "/resume", label: "Résumé" },
+  { href: "/#contact", label: "Contact" },
+];
+---
+
+<footer class="site-footer">
+  <div class="shell site-footer__inner">
+    <div class="site-footer__brand">
+      <span class="brand-mark" aria-hidden="true">KV</span>
+      <div>
+        <p class="site-footer__name">{profile.name}</p>
+        <p class="site-footer__muted">Designed and engineered in Mumbai.</p>
+      </div>
+    </div>
+
+    <nav class="site-footer__nav" aria-label="Footer">
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+
+    <div class="site-footer__meta">
+      <p>© {year} {profile.name}</p>
+      <p>Built with Astro · Hand tracking by MediaPipe, on your device · Answers by Groq</p>
+      <a class="link-arrow" href="#main">Back to top <Icon name="arrow-up" /></a>
+    </div>
+  </div>
+</footer>

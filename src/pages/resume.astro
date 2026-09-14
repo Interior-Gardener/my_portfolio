@@ -1,0 +1,114 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import { education, experience, hobbies, profile, projects, recognition, resumeSkills } from "../data/site";
+
+const pdf = profile.links.resumePdf;
+---
+
+<Base title="Résumé" description="Kartik Verma's résumé: education, internships at JSW Steel, Claidroid Technologies and Central Railway, flagship projects, skills and awards.">
+  <div class="resume-page shell">
+    <header class="resume-intro">
+      <a class="back-link" href="/"><Icon name="arrow-left" size={16} />Home</a>
+      <h1 class="section-title" data-reveal>Résumé</h1>
+      <p class="section-lede" data-reveal style="--d:1">
+        Education, three internships and flagship projects on a single page. Read the web version, view the original PDF, or download it.
+      </p>
+    </header>
+
+    <div class="resume-toolbar" role="toolbar" aria-label="Résumé actions">
+      <div class="segmented" role="tablist" aria-label="Résumé format">
+        <button type="button" role="tab" id="tab-web" aria-controls="panel-web" aria-selected="true" data-resume-tab="web">Web version</button>
+        <button type="button" role="tab" id="tab-pdf" aria-controls="panel-pdf" aria-selected="false" tabindex="-1" data-resume-tab="pdf">Original PDF</button>
+      </div>
+      <div class="resume-toolbar__actions">
+        <button type="button" class="btn btn--ghost btn--sm" data-ask-open data-ask-prompt="Summarise Kartik's résumé in five bullet points.">
+          <Icon name="spark" size={16} /><span>Summarise</span>
+        </button>
+        <button type="button" class="btn btn--ghost btn--sm" data-print><Icon name="print" size={16} /><span>Print</span></button>
+        <a class="btn btn--signal btn--sm" href={pdf} download="Kartik-Verma-Resume.pdf"><Icon name="download" size={16} /><span>Download PDF</span></a>
+      </div>
+    </div>
+
+    <div id="panel-web" role="tabpanel" aria-labelledby="tab-web">
+      <article class="sheet">
+        <header class="sheet__head">
+          <h2 class="sheet__name">{profile.name}</h2>
+          <p class="sheet__contact">
+            <span>{profile.location}</span>
+            <a href={`mailto:${profile.email}`}>{profile.email}</a>
+            <a href={profile.links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href={profile.links.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href={profile.links.leetcode} target="_blank" rel="noopener noreferrer">LeetCode</a>
+          </p>
+        </header>
+
+        <section class="sheet__section">
+          <h3>Education</h3>
+          <div class="sheet__row"><strong>{education.school}</strong><span>{education.dates}</span></div>
+          <p>{education.degree} ({education.honours}), {education.affiliation}</p>
+          <p>{education.cgpaNote}: <strong>{education.cgpa}</strong></p>
+          <p class="sheet__muted">Courses: {education.courses.join(", ")}</p>
+        </section>
+
+        <section class="sheet__section">
+          <h3>Work experience</h3>
+          {experience.map((job) => (
+            <div class="sheet__entry">
+              <div class="sheet__row"><strong>{job.role} · {job.company}</strong><span>{job.dates}</span></div>
+              <p class="sheet__muted">{job.mode}</p>
+              <ul>{job.bullets.map((bullet) => <li>{bullet}</li>)}</ul>
+            </div>
+          ))}
+        </section>
+
+        <section class="sheet__section">
+          <h3>Projects</h3>
+          {projects.map((project) => (
+            <div class="sheet__entry">
+              <div class="sheet__row"><strong><a href={`/work/${project.slug}`}>{project.name}</a></strong><span>{project.year}</span></div>
+              <ul>{project.resumeBullets.map((bullet) => <li>{bullet}</li>)}</ul>
+            </div>
+          ))}
+        </section>
+
+        <section class="sheet__section">
+          <h3>Technical skills</h3>
+          <dl class="sheet__skills">
+            {resumeSkills.map((group) => (
+              <div>
+                <dt>{group.label}</dt>
+                <dd>{group.items.join(", ")}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+
+        <section class="sheet__section">
+          <h3>Achievements &amp; certifications</h3>
+          <ul>
+            {recognition.map((item) => (
+              <li>
+                <strong>{item.title}</strong>, {item.detail}{item.project ? ` (${item.project})` : ""}{item.kind === "certification" ? "" : `, ${item.year}`}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="sheet__section">
+          <h3>Hobbies</h3>
+          <p>{hobbies.join(" · ")}</p>
+        </section>
+      </article>
+    </div>
+
+    <div id="panel-pdf" role="tabpanel" aria-labelledby="tab-pdf" hidden>
+      <object class="pdf-frame" type="application/pdf" data-pdf-frame data-src={pdf} aria-label="Résumé PDF">
+        <div class="pdf-fallback">
+          <p>Your browser can't display the PDF inline.</p>
+          <a class="btn btn--signal" href={pdf} download="Kartik-Verma-Resume.pdf"><Icon name="download" />Download the PDF</a>
+        </div>
+      </object>
+    </div>
+  </div>
+</Base>

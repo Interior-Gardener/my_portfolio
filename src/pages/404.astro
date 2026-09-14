@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+---
+
+<Base title="Page not found" description="This page doesn't exist on Kartik Verma's portfolio.">
+  <section class="not-found shell" aria-labelledby="not-found-title">
+    <p class="eyebrow">Error 404</p>
+    <h1 class="not-found__title" id="not-found-title">Signal<br />lost.</h1>
+    <p class="section-lede">This page doesn't exist, or it has moved. Here's where you can go instead.</p>
+    <div class="hero__actions">
+      <a class="btn btn--ink" href="/"><Icon name="arrow-left" />Back home</a>
+      <a class="btn btn--ghost" href="/#work">See my work</a>
+      <button type="button" class="btn btn--ghost" data-ask-open><Icon name="spark" />Ask the assistant</button>
+    </div>
+  </section>
+</Base>

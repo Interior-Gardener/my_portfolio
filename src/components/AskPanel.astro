@@ -1,0 +1,61 @@
+---
+import Icon from "./Icon.astro";
+import { pages, profile } from "../data/site";
+
+const suggestions = [
+  "What did Kartik build at JSW Steel?",
+  "How does GeoSwipe's hand tracking work?",
+  "Which projects use machine learning?",
+  "What awards has Kartik won?",
+  "Summarise his résumé in five bullet points.",
+];
+---
+
+<dialog class="ask" data-ask data-routes={pages.map((page) => page.path).join(" ")} data-email={profile.email} aria-labelledby="ask-title">
+  <div class="ask__head">
+    <div class="ask__title">
+      <span class="ask__badge"><Icon name="spark" size={16} /></span>
+      <div>
+        <h2 id="ask-title">Ask about Kartik</h2>
+        <p>Answers come only from this site's content</p>
+      </div>
+    </div>
+    <div class="ask__head-actions">
+      <button type="button" class="icon-btn" data-ask-reset hidden aria-label="Start a new conversation" title="New conversation">
+        <Icon name="reset" />
+      </button>
+      <button type="button" class="icon-btn" data-ask-close aria-label="Close the assistant">
+        <Icon name="close" />
+      </button>
+    </div>
+  </div>
+
+  <div class="ask__log" data-ask-log role="log" aria-live="polite">
+    <div class="ask__intro" data-ask-intro>
+      <p class="ask__hello">Hi! I can answer questions about Kartik's projects, internships, skills and awards.</p>
+      <p class="eyebrow">Try asking</p>
+      <div class="ask__suggestions">
+        {suggestions.map((suggestion) => (
+          <button type="button" class="suggestion" data-ask-suggestion>{suggestion}</button>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <form class="ask__form" data-ask-form>
+    <label class="visually-hidden" for="ask-input">Your question</label>
+    <div class="ask__field">
+      <textarea id="ask-input" data-ask-input rows="1" placeholder="Ask anything about Kartik's work…" autocomplete="off"></textarea>
+      <button type="submit" class="ask__send" data-ask-send aria-label="Send question" disabled>
+        <Icon name="send" size={18} />
+      </button>
+      <button type="button" class="ask__send ask__send--stop" data-ask-stop aria-label="Stop the answer" hidden>
+        <Icon name="stop" size={18} />
+      </button>
+    </div>
+    <div class="ask__foot">
+      <span>AI can make mistakes. Check the résumé for specifics.</span>
+      <span data-ask-count>0/800</span>
+    </div>
+  </form>
+</dialog>

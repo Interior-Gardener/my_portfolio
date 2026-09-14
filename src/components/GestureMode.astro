@@ -1,0 +1,48 @@
+---
+import Icon from "./Icon.astro";
+
+const gestures = [
+  { pose: "Open palm", action: "Move the cursor" },
+  { pose: "OK sign", action: "Click whatever is under the cursor" },
+  { pose: "Thumbs up / down", action: "Scroll up or down" },
+  { pose: "Peace sign, left / right", action: "Jump to the previous or next section" },
+];
+---
+
+<dialog class="modal" data-gesture-intro aria-labelledby="gesture-title">
+  <div class="modal__head">
+    <span class="ask__badge"><Icon name="hand" size={18} /></span>
+    <h2 id="gesture-title">Gesture Mode</h2>
+    <button type="button" class="icon-btn" data-gesture-cancel aria-label="Close">
+      <Icon name="close" />
+    </button>
+  </div>
+  <p class="modal__text">Browse this site with your hand, using the same on-device hand tracking I built for GeoSwipe.</p>
+  <ul class="gesture-legend">
+    {gestures.map((gesture) => (
+      <li>
+        <strong>{gesture.pose}</strong>
+        <span>{gesture.action}</span>
+      </li>
+    ))}
+  </ul>
+  <p class="privacy-note">
+    <Icon name="shield" size={16} />
+    <span>Your camera feed is processed entirely in your browser. No video is uploaded or stored.</span>
+  </p>
+  <div class="modal__actions">
+    <button type="button" class="btn btn--ghost" data-gesture-cancel>Not now</button>
+    <button type="button" class="btn btn--signal" data-gesture-start><Icon name="camera" />Start camera</button>
+  </div>
+</dialog>
+
+<div class="gesture-hud" data-gesture-hud hidden>
+  <video muted playsinline></video>
+  <div class="gesture-hud__row">
+    <span class="gesture-hud__status" data-gesture-status role="status">Starting…</span>
+    <span class="gesture-hud__fps" data-gesture-fps></span>
+  </div>
+  <button type="button" class="btn btn--ghost btn--sm" data-gesture-stop>Stop Gesture Mode</button>
+</div>
+
+<div class="gesture-cursor" data-gesture-cursor aria-hidden="true"></div>

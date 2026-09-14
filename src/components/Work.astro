@@ -1,0 +1,82 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import SectionHead from "./SectionHead.astro";
+import { projects } from "../data/site";
+import { workMedia } from "../lib/media";
+
+const pad = (value: number) => String(value).padStart(2, "0");
+---
+
+<section class="section" id="work" aria-labelledby="work-title">
+  <div class="shell">
+    <SectionHead
+      index="01"
+      eyebrow="Selected work"
+      id="work-title"
+      title="Things I've built"
+      lede="Three systems I designed and engineered end to end. Open any of them for the architecture, the trade-offs and the numbers."
+    />
+
+    <div class="work-stack">
+      {projects.map((project, index) => {
+        const media = workMedia[project.slug]!;
+        const secondary = media.gallery[0]!;
+        return (
+          <article class="work-card" data-work-card style={`--i:${index}; --tint:${project.tint}`} aria-labelledby={`work-${project.slug}`}>
+            <div class="work-card__grid">
+              <div class="work-card__info">
+                <div class="work-card__meta">
+                  <span class="eyebrow">{pad(index + 1)} / {pad(projects.length)}</span>
+                  <span class="eyebrow">{project.category}</span>
+                </div>
+                <h3 class="work-card__title" id={`work-${project.slug}`}>
+                  <a href={`/work/${project.slug}`}>{project.shortName}</a>
+                </h3>
+                <p class="work-card__tagline">{project.tagline}</p>
+                {project.award && (
+                  <p class="award-line">
+                    <span class="award-line__icon"><Icon name="trophy" size={14} /></span>
+                    <span>{project.award}</span>
+                  </p>
+                )}
+                <dl class="metrics">
+                  {project.metrics.slice(0, 3).map((metric) => (
+                    <div class="metric">
+                      <dt>{metric.label}</dt>
+                      <dd>{metric.value}</dd>
+                    </div>
+                  ))}
+                </dl>
+                <ul class="chips" aria-label="Tech stack">
+                  {project.stack.slice(0, 6).map((item) => <li class="chip">{item}</li>)}
+                </ul>
+                <div class="work-card__actions">
+                  <a class="btn btn--ink" href={`/work/${project.slug}`}>Read case study <Icon name="arrow-right" class="arrow" /></a>
+                  {project.links.live ? (
+                    <a class="btn btn--ghost" href={project.links.live.href} target="_blank" rel="noopener noreferrer">
+                      {project.links.live.label} <Icon name="arrow-up-right" />
+                    </a>
+                  ) : project.links.code ? (
+                    <a class="btn btn--ghost" href={project.links.code.href} target="_blank" rel="noopener noreferrer">
+                      <Icon name="branch" /> {project.links.code.label}
+                    </a>
+                  ) : null}
+                </div>
+              </div>
+
+              <div class="work-card__media">
+                <a class="media-frame media-frame--main" href={`/work/${project.slug}`} tabindex="-1" aria-hidden="true">
+                  <Image src={media.cover.src} alt="" widths={[640, 960, 1400]} sizes="(max-width: 960px) 92vw, 56vw" loading={index === 0 ? "eager" : "lazy"} />
+                </a>
+                <div class="media-frame media-frame--float" aria-hidden="true">
+                  <Image src={secondary.src} alt="" widths={[420, 720]} sizes="(max-width: 960px) 46vw, 24vw" />
+                </div>
+              </div>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  </div>
+</section>

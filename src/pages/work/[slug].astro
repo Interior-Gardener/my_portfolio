@@ -1,0 +1,225 @@
+---
+import { Image, getImage } from "astro:assets";
+import Base from "../../layouts/Base.astro";
+import Icon from "../../components/Icon.astro";
+import { profile, projects } from "../../data/site";
+import { workMedia } from "../../lib/media";
+
+export function getStaticPaths() {
+  return projects.map((project, index) => ({ params: { slug: project.slug }, props: { index } }));
+}
+
+interface Props {
+  index: number;
+}
+
+const { index } = Astro.props;
+const project = projects[index]!;
+const media = workMedia[project.slug]!;
+const previous = projects[(index - 1 + projects.length) % projects.length]!;
+const next = projects[(index + 1) % projects.length]!;
+const nextCover = workMedia[next.slug]!.cover;
+const pad = (value: number) => String(value).padStart(2, "0");
+
+const coverFull = await getImage({ src: media.cover.src, width: 2000, format: "webp" });
+const socialImage = await getImage({ src: media.cover.src, width: 1200, height: 630, format: "png" });
+const gallery = await Promise.all(
+  media.gallery.map(async (shot) => ({ ...shot, full: await getImage({ src: shot.src, width: 1800, format: "webp" }) })),
+);
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: project.name,
+  headline: project.tagline,
+  description: project.summary,
+  creator: { "@type": "Person", name: profile.name },
+  keywords: project.stack.join(", "),
+  url: new URL(`/work/${project.slug}`, Astro.site).href,
+};
+---
+
+<Base title={project.name} description={`${project.tagline} ${project.summary}`} image={socialImage.src} type="article" jsonLd={jsonLd}>
+  <article class="case" style={`--tint:${project.tint}`}>
+    <header class="case-hero shell">
+      <a class="back-link" href="/#work"><Icon name="arrow-left" size={16} />All work</a>
+      <div class="case-hero__meta" data-reveal>
+        <span class="eyebrow">Case study {pad(index + 1)}</span>
+        <span class="eyebrow">{project.category}</span>
+      </div>
+      <h1 class="case-title" data-reveal style="--d:1">{project.name}</h1>
+      <p class="case-tagline" data-reveal style="--d:2">{project.tagline}</p>
+
+      <div class="case-actions" data-reveal style="--d:3">
+        {project.links.live && (
+          <a class="btn btn--signal" href={project.links.live.href} target="_blank" rel="noopener noreferrer">
+            {project.links.live.label} <Icon name="arrow-up-right" />
+          </a>
+        )}
+        {project.links.demo && (
+          <a class="btn btn--ghost" href={project.links.demo.href} target="_blank" rel="noopener noreferrer">
+            <Icon name="play" size={14} /> {project.links.demo.label}
+          </a>
+        )}
+        {project.links.code && (
+          <a class="btn btn--ghost" href={project.links.code.href} target="_blank" rel="noopener noreferrer">
+            <Icon name="branch" /> {project.links.code.label}
+          </a>
+        )}
+        <button type="button" class="btn btn--ghost" data-ask-open data-ask-prompt={`Give me a quick technical overview of ${project.name}.`}>
+          <Icon name="spark" /> Ask AI about it
+        </button>
+      </div>
+
+      <dl class="case-facts" data-reveal style="--d:4">
+        <div>
+          <dt>Role</dt>
+          <dd>{project.role}</dd>
+        </div>
+        <div>
+          <dt>Timeline</dt>
+          <dd>{project.timeline}</dd>
+        </div>
+        <div>
+          <dt>Stack</dt>
+          <dd>{project.stack.join(", ")}</dd>
+        </div>
+        <div>
+          <dt>Recognition</dt>
+          <dd>{project.award ?? "Hackathon project"}</dd>
+        </div>
+      </dl>
+    </header>
+
+    <div class="shell">
+      <a class="case-cover media-frame" href={coverFull.src} data-lightbox-trigger data-alt={media.cover.alt} data-caption={media.cover.caption} data-reveal>
+        <Image src={media.cover.src} alt={media.cover.alt} widths={[800, 1280, 1800]} sizes="(max-width: 1320px) 94vw, 1320px" loading="eager" />
+      </a>
+
+      <dl class="case-metrics">
+        {project.metrics.map((metric, i) => (
+          <div data-reveal style={`--d:${i}`}>
+            <dt>{metric.label}</dt>
+            <dd>{metric.value}</dd>
+          </div>
+        ))}
+      </dl>
+
+      <section class="case-story" aria-label="Overview">
+        <div class="story-row" data-reveal>
+          <h2 class="eyebrow">Overview</h2>
+          <p class="story-row__text story-row__text--body">{project.summary}</p>
+        </div>
+        <div class="story-row" data-reveal>
+          <h2 class="eyebrow">The problem</h2>
+          <p class="story-row__text">{project.problem}</p>
+        </div>
+        <div class="story-row" data-reveal>
+          <h2 class="eyebrow">The approach</h2>
+          <p class="story-row__text">{project.approach}</p>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="architecture-title">
+        <div class="case-section__head">
+          <p class="section-index"><span>A</span><span>Architecture</span></p>
+          <h2 class="case-h2" id="architecture-title" data-reveal>How it fits together</h2>
+        </div>
+        <div class="arch" style={`--lanes:${project.architecture.length}`}>
+          {project.architecture.map((lane, laneIndex) => (
+            <div class="arch__lane" data-reveal style={`--d:${laneIndex}`}>
+              <p class="arch__lane-title"><span>{pad(laneIndex + 1)}</span>{lane.title}</p>
+              <ul class="arch__nodes">
+                {lane.nodes.map((node) => (
+                  <li class:list={["arch__node", { "is-highlight": node.highlight }]}>
+                    <strong>{node.name}</strong>
+                    <span>{node.detail}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="decisions-title">
+        <div class="case-section__head">
+          <p class="section-index"><span>B</span><span>Engineering decisions</span></p>
+          <h2 class="case-h2" id="decisions-title" data-reveal>The calls that mattered</h2>
+        </div>
+        <ol class="decisions">
+          {project.decisions.map((decision, decisionIndex) => (
+            <li class="decision" data-reveal>
+              <div class="decision__head">
+                <span class="decision__index">{pad(decisionIndex + 1)}</span>
+                <h3 class="decision__title">{decision.title}</h3>
+              </div>
+              <div class="decision__body">
+                <p>{decision.body}</p>
+                {decision.compare && (
+                  <div class="compare">
+                    <div class="compare__cell">
+                      <span class="eyebrow">Before</span>
+                      <span class="compare__value">{decision.compare.before.value}</span>
+                      <span class="compare__label">{decision.compare.before.label}</span>
+                    </div>
+                    <span class="compare__arrow" aria-hidden="true"><Icon name="arrow-right" size={20} /></span>
+                    <div class="compare__cell compare__cell--after">
+                      <span class="eyebrow">After</span>
+                      <span class="compare__value">{decision.compare.after.value}</span>
+                      <span class="compare__label">{decision.compare.after.label}</span>
+                    </div>
+                  </div>
+                )}
+                <ul class="facts">
+                  {decision.facts.map((fact) => (
+                    <li><Icon name="check" size={16} /><span>{fact}</span></li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="case-section" aria-labelledby="gallery-title">
+        <div class="case-section__head">
+          <p class="section-index"><span>C</span><span>In the product</span></p>
+          <h2 class="case-h2" id="gallery-title" data-reveal>Screens</h2>
+        </div>
+        <div class="gallery">
+          {gallery.map((shot) => (
+            <figure class="gallery__item" data-reveal>
+              <a class="media-frame" href={shot.full.src} data-lightbox-trigger data-alt={shot.alt} data-caption={shot.caption}>
+                <Image src={shot.src} alt={shot.alt} widths={[600, 900, 1300]} sizes="(max-width: 900px) 94vw, 46vw" />
+              </a>
+              <figcaption>{shot.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <section class="case-section case-outcome" aria-labelledby="outcome-title">
+        <div class="story-row" data-reveal>
+          <h2 class="eyebrow" id="outcome-title">Outcome</h2>
+          <p class="story-row__text">{project.outcome}</p>
+        </div>
+      </section>
+
+      <nav class="case-nav" aria-label="More case studies">
+        <a class="case-nav__prev panel" href={`/work/${previous.slug}`}>
+          <span class="eyebrow"><Icon name="arrow-left" size={14} /> Previous</span>
+          <strong>{previous.name}</strong>
+        </a>
+        <a class="case-nav__next panel" href={`/work/${next.slug}`}>
+          <span class="case-nav__next-text">
+            <span class="eyebrow">Next case study <Icon name="arrow-right" size={14} /></span>
+            <strong>{next.name}</strong>
+            <span>{next.tagline}</span>
+          </span>
+          <Image src={nextCover.src} alt="" widths={[400, 700]} sizes="(max-width: 900px) 90vw, 30vw" />
+        </a>
+      </nav>
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,58 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  mode: "home" | "page";
+}
+
+const { mode } = Astro.props;
+const base = mode === "home" ? "" : "/";
+const links = [
+  { id: "work", label: "Work" },
+  { id: "skills", label: "Skills" },
+  { id: "experience", label: "Experience" },
+  { id: "recognition", label: "Recognition" },
+  { id: "contact", label: "Contact" },
+];
+const current = Astro.url.pathname.replace(/\/$/, "");
+---
+
+<header class="nav" data-nav>
+  <div class="nav__bar">
+    <a class="nav__brand" href="/" aria-label="Kartik Verma, home">
+      <span class="brand-mark" aria-hidden="true">KV</span>
+      <span class="nav__brand-name">Kartik Verma</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      {links.map((link) => (
+        <a href={`${base}#${link.id}`} data-section-link={mode === "home" ? link.id : undefined}>
+          {link.label}
+        </a>
+      ))}
+      <a href="/resume" aria-current={current === "/resume" ? "page" : undefined}>Résumé</a>
+    </nav>
+
+    <div class="nav__actions">
+      <button type="button" class="icon-btn" data-gesture-toggle aria-pressed="false" aria-label="Turn on Gesture Mode" title="Gesture Mode">
+        <Icon name="hand" />
+      </button>
+      <button type="button" class="icon-btn" data-theme-toggle aria-label="Switch theme">
+        <Icon name="sun" class="icon-sun" />
+        <Icon name="moon" class="icon-moon" />
+      </button>
+      <button type="button" class="btn btn--signal btn--sm nav__ask" data-ask-open aria-label="Ask AI about Kartik">
+        <Icon name="spark" size={16} />
+        <span>Ask AI</span>
+      </button>
+      <button type="button" class="icon-btn nav__menu-btn" data-menu-button aria-expanded="false" aria-controls="nav-sheet" aria-label="Open menu">
+        <Icon name="menu" />
+      </button>
+    </div>
+  </div>
+
+  <div class="nav__sheet" id="nav-sheet" data-menu-sheet hidden>
+    {links.map((link) => <a href={`${base}#${link.id}`}>{link.label}</a>)}
+    <a href="/resume">Résumé</a>
+  </div>
+</header>

@@ -1,0 +1,49 @@
+---
+import Icon from "./Icon.astro";
+import SectionHead from "./SectionHead.astro";
+import { profile, sideProjects } from "../data/site";
+---
+
+<section class="section section--tight" id="more-projects" aria-labelledby="more-title">
+  <div class="shell">
+    <SectionHead
+      index="02"
+      eyebrow="More projects"
+      id="more-title"
+      title="Smaller, sharper builds"
+      lede="Machine-learning projects from my internships, and the industrial system I built at JSW Steel."
+    />
+    <ul class="side-grid">
+      {sideProjects.map((project, index) => (
+        <li class="side-card panel" data-reveal style={`--d:${index}`}>
+          <div class="side-card__top">
+            <span class="chip">{project.context}</span>
+            {project.link && (
+              <a class="icon-btn" href={project.link.href} target="_blank" rel="noopener noreferrer" aria-label={`${project.name} ${project.link.label.toLowerCase()} on GitHub`}>
+                <Icon name="arrow-up-right" />
+              </a>
+            )}
+          </div>
+          <h3 class="side-card__title">{project.name}</h3>
+          <p class="side-card__summary">{project.summary}</p>
+          <dl class="side-card__metrics">
+            {project.metrics.map((metric) => (
+              <div>
+                <dt>{metric.label}</dt>
+                <dd>{metric.value}</dd>
+              </div>
+            ))}
+          </dl>
+          <ul class="chips" aria-label="Tech stack">
+            {project.stack.map((item) => <li class="chip">{item}</li>)}
+          </ul>
+        </li>
+      ))}
+    </ul>
+    <p class="side-more" data-reveal>
+      <a class="link-arrow" href={profile.links.github} target="_blank" rel="noopener noreferrer">
+        Everything else lives on GitHub <Icon name="arrow-up-right" />
+      </a>
+    </p>
+  </div>
+</section>

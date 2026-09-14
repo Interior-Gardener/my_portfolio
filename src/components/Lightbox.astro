@@ -1,0 +1,13 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<dialog class="lightbox" data-lightbox aria-label="Image viewer">
+  <button type="button" class="icon-btn lightbox__close" data-lightbox-close aria-label="Close image">
+    <Icon name="close" />
+  </button>
+  <figure class="lightbox__figure">
+    <img alt="" decoding="async" />
+    <figcaption hidden></figcaption>
+  </figure>
+</dialog>

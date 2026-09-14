@@ -1,0 +1,49 @@
+---
+import { Image } from "astro:assets";
+import Icon from "./Icon.astro";
+import { education, hobbies, profile } from "../data/site";
+import { photos } from "../lib/media";
+---
+
+<section class="section" id="about" aria-labelledby="about-title">
+  <div class="shell about">
+    <div class="about__photos" data-reveal>
+      <figure class="about__photo">
+        <Image src={photos.portrait.src} alt={photos.portrait.alt} widths={[420, 760]} sizes="(max-width: 960px) 60vw, 24vw" />
+      </figure>
+      <figure class="about__photo about__photo--wide">
+        <Image src={photos.summit.src} alt={photos.summit.alt} widths={[480, 900]} sizes="(max-width: 960px) 80vw, 30vw" />
+      </figure>
+    </div>
+
+    <div class="about__text">
+      <p class="section-index" data-reveal><span>07</span><span>About</span></p>
+      <h2 class="section-title" id="about-title" data-reveal style="--d:1">Hi, I'm Kartik.</h2>
+      {profile.intro.map((paragraph, index) => (
+        <p class:list={["about__paragraph", { "about__paragraph--lead": index === 0 }]} data-reveal style={`--d:${index + 2}`}>
+          {paragraph}
+        </p>
+      ))}
+      <p class="about__paragraph" data-reveal style="--d:4">{profile.offKeyboard}</p>
+
+      <dl class="about__facts" data-reveal style="--d:5">
+        <div>
+          <dt><Icon name="pin" size={14} />Based in</dt>
+          <dd>{profile.location}</dd>
+        </div>
+        <div>
+          <dt><Icon name="graduation" size={14} />Studying</dt>
+          <dd>{education.degree}</dd>
+        </div>
+        <div>
+          <dt><Icon name="briefcase" size={14} />Graduating</dt>
+          <dd>July 2027</dd>
+        </div>
+      </dl>
+
+      <ul class="chips chips--lg" aria-label="Hobbies" data-reveal style="--d:6">
+        {hobbies.map((hobby) => <li class="chip">{hobby}</li>)}
+      </ul>
+    </div>
+  </div>
+</section>
