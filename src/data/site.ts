@@ -137,7 +137,7 @@ export const experience: Experience[] = [
     company: "Claidroid Technologies",
     role: "Machine Learning Intern",
     mode: "Remote · two virtual internships",
-    dates: "Dec 2024 – Jan 2025 · Jun 2025 – Jul 2025",
+    dates: "Jun 2025 – Jul 2025 · Dec 2025 – Jan 2026",
     summary: "Two virtual internships, each shipping a complete machine-learning project from data to interface.",
     bullets: [
       "Built and deployed an NLP-based college FAQ chatbot (Flask, scikit-learn, NLTK) covering 75 intents, using WordNet-based augmentation to expand training data to 3,200+ examples; benchmarked 5 classifier families with GridSearchCV, achieving 92.7% test accuracy with a tuned Random Forest.",
