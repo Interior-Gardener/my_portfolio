@@ -82,12 +82,15 @@ function initCursor(cursor: HTMLElement) {
   window.addEventListener("pointerdown", () => cursor.classList.add("is-down"));
   window.addEventListener("pointerup", () => cursor.classList.remove("is-down"));
 
-  const syncDialogs = () => {
-    const dialogOpen = document.querySelector("dialog[open]") !== null;
-    root.classList.toggle("has-cursor", !dialogOpen);
-    cursor.classList.toggle("is-suspended", dialogOpen);
+  // Dialogs render in the top layer and Gesture Mode draws its own pointer,
+  // so both hand control back to the native mouse cursor.
+  const syncNativeCursor = () => {
+    const suspended = document.querySelector("dialog[open]") !== null || root.classList.contains("gesture-active");
+    if (root.classList.contains("has-cursor") === suspended) root.classList.toggle("has-cursor", !suspended);
+    cursor.classList.toggle("is-suspended", suspended);
   };
-  new MutationObserver(syncDialogs).observe(document.body, { subtree: true, attributes: true, attributeFilter: ["open"] });
+  new MutationObserver(syncNativeCursor).observe(document.body, { subtree: true, attributes: true, attributeFilter: ["open"] });
+  new MutationObserver(syncNativeCursor).observe(root, { attributes: true, attributeFilter: ["class"] });
 
   if (reducedMotion) return;
 
