@@ -14,19 +14,19 @@ dist/
 public/mediapipe/wasm/
 
 # raw source material (optimised copies live in src/assets and public)
-Atomix Screenshots/
-Geoswipe screenshots/
-Hospital operations sync platform screenshots/
-Industrial asset management screenshots/
-ciia images/
-jsw images/
-/logos/
-my photos/
-resume/
-tech stack icons/
-design/*.html
-design/img/
-brand-source/
+# Atomix Screenshots/
+# Geoswipe screenshots/
+# Hospital operations sync platform screenshots/
+# Industrial asset management screenshots/
+# ciia images/
+# jsw images/
+# /logos/
+# my photos/
+# resume/
+# tech stack icons/
+# design/*.html
+# design/img/
+# brand-source/
 
 # OS / editor
 .DS_Store
