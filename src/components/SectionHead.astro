@@ -13,7 +13,7 @@ const { index, eyebrow, title, id, lede } = Astro.props;
 <header class="section-head">
   <div class="section-head__main">
     <p class="section-index" data-reveal><span>{index}</span><span>{eyebrow}</span></p>
-    <h2 class="section-title" id={id} data-reveal style="--d:1">{title}</h2>
+    <h2 class="section-title" id={id} data-reveal data-split style="--d:1">{title}</h2>
   </div>
   {lede && <p class="section-lede" data-reveal style="--d:2">{lede}</p>}
 </header>

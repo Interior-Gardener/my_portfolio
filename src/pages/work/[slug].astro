@@ -47,7 +47,7 @@ const jsonLd = {
         <span class="eyebrow">Case study {pad(index + 1)}</span>
         <span class="eyebrow">{project.category}</span>
       </div>
-      <h1 class="case-title" data-reveal style="--d:1">{project.name}</h1>
+      <h1 class="case-title" data-reveal data-split style="--d:1">{project.name}</h1>
       <p class="case-tagline" data-reveal style="--d:2">{project.tagline}</p>
 
       <div class="case-actions" data-reveal style="--d:3">
@@ -92,8 +92,8 @@ const jsonLd = {
     </header>
 
     <div class="shell">
-      <a class="case-cover media-frame" href={coverFull.src} data-lightbox-trigger data-alt={media.cover.alt} data-caption={media.cover.caption} data-reveal>
-        <Image src={media.cover.src} alt={media.cover.alt} widths={[800, 1280, 1800]} sizes="(max-width: 1320px) 94vw, 1320px" loading="eager" />
+      <a class="case-cover media-frame" href={coverFull.src} data-lightbox-trigger data-alt={media.cover.alt} data-caption={media.cover.caption} data-reveal data-cursor="Zoom">
+        <Image src={media.cover.src} alt={media.cover.alt} widths={[800, 1280, 1800]} sizes="(max-width: 1320px) 94vw, 1320px" loading="eager" data-parallax />
       </a>
 
       <dl class="case-metrics">
@@ -190,7 +190,7 @@ const jsonLd = {
         <div class="gallery">
           {gallery.map((shot) => (
             <figure class="gallery__item" data-reveal>
-              <a class="media-frame" href={shot.full.src} data-lightbox-trigger data-alt={shot.alt} data-caption={shot.caption}>
+              <a class="media-frame" href={shot.full.src} data-lightbox-trigger data-alt={shot.alt} data-caption={shot.caption} data-cursor="Zoom">
                 <Image src={shot.src} alt={shot.alt} widths={[600, 900, 1300]} sizes="(max-width: 900px) 94vw, 46vw" />
               </a>
               <figcaption>{shot.caption}</figcaption>

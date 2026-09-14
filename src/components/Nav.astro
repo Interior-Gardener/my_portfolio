@@ -1,5 +1,7 @@
 ---
+import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
+import brandLogo from "../assets/brand/kv-logo.png";
 
 interface Props {
   mode: "home" | "page";
@@ -20,7 +22,7 @@ const current = Astro.url.pathname.replace(/\/$/, "");
 <header class="nav" data-nav>
   <div class="nav__bar">
     <a class="nav__brand" href="/" aria-label="Kartik Verma, home">
-      <span class="brand-mark" aria-hidden="true">KV</span>
+      <Image src={brandLogo} alt="" width={84} height={84} class="brand-logo" data-brand-logo loading="eager" />
       <span class="nav__brand-name">Kartik Verma</span>
     </a>
 

@@ -9,16 +9,16 @@ import { photos } from "../lib/media";
   <div class="shell about">
     <div class="about__photos" data-reveal>
       <figure class="about__photo">
-        <Image src={photos.portrait.src} alt={photos.portrait.alt} widths={[420, 760]} sizes="(max-width: 960px) 60vw, 24vw" />
+        <Image src={photos.portrait.src} alt={photos.portrait.alt} widths={[420, 760]} sizes="(max-width: 960px) 60vw, 24vw" data-parallax />
       </figure>
       <figure class="about__photo about__photo--wide">
-        <Image src={photos.summit.src} alt={photos.summit.alt} widths={[480, 900]} sizes="(max-width: 960px) 80vw, 30vw" />
+        <Image src={photos.summit.src} alt={photos.summit.alt} widths={[480, 900]} sizes="(max-width: 960px) 80vw, 30vw" data-parallax />
       </figure>
     </div>
 
     <div class="about__text">
       <p class="section-index" data-reveal><span>07</span><span>About</span></p>
-      <h2 class="section-title" id="about-title" data-reveal style="--d:1">Hi, I'm Kartik.</h2>
+      <h2 class="section-title" id="about-title" data-reveal data-split style="--d:1">Hi, I'm Kartik.</h2>
       {profile.intro.map((paragraph, index) => (
         <p class:list={["about__paragraph", { "about__paragraph--lead": index === 0 }]} data-reveal style={`--d:${index + 2}`}>
           {paragraph}

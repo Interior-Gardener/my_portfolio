@@ -73,7 +73,7 @@ const jswPhotos = await Promise.all(
                 {job.id === "jsw" && (
                   <div class="xp__photos">
                     {jswPhotos.map((photo) => (
-                      <a class="photo-thumb" href={photo.full.src} data-lightbox-trigger data-alt={photo.alt} data-caption={photo.caption}>
+                      <a class="photo-thumb" href={photo.full.src} data-lightbox-trigger data-alt={photo.alt} data-caption={photo.caption} data-cursor="Zoom">
                         <Image src={photo.src} alt={photo.alt} widths={[280, 560]} sizes="280px" />
                         <span class="photo-thumb__zoom" aria-hidden="true"><Icon name="expand" size={14} /></span>
                       </a>

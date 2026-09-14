@@ -70,6 +70,7 @@ export type Recognition = {
 export const profile = {
   name: "Kartik Verma",
   headline: "Software engineer building interactive, AI-powered systems",
+  tagline: "Building ideas. Creating impact.",
   description:
     "Kartik Verma is a Computer Engineering (Honours in AI & ML) student in Mumbai who builds gesture-controlled web apps, VR simulations and machine-learning systems, with real numbers behind every project.",
   location: "Mumbai, India",

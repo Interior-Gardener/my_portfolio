@@ -177,7 +177,9 @@ Hobby includes 1,000,000 function invocations a month, far more than the assista
 | Screenshots and captions | Images in `src/assets/work/<project>/`, captions in `src/lib/media.ts` |
 | Photos | `src/assets/photos/` and `src/lib/media.ts` |
 | Résumé PDF | Replace `public/kartik-verma-resume.pdf` (keep the name) |
-| Colours, fonts, spacing | `src/styles/global.css` (theme tokens are at the top) |
+| Colours, fonts, spacing | `src/styles/global.css` (theme tokens, including the animated background palette, are at the top) |
+| Logo | Put the new square logo at `brand-source/kv-logo.png`, then run `node scripts/process-logo.mjs` and `node scripts/generate-og.mjs` to regenerate the circular logo, favicons and social image |
+| Intro screen, cursor, smooth scroll, background | `src/scripts/preloader.ts`, `cursor.ts`, `smooth.ts`, `background.ts` (styles in `src/styles/experience.css`) |
 | Assistant rules | `server/knowledge.ts` |
 
 After editing: `npm run build` locally, then `git add . && git commit -m "Update content" && git push`. Cloudflare redeploys automatically in a few minutes.

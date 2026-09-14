@@ -1,6 +1,8 @@
 ---
+import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import { profile } from "../data/site";
+import brandLogo from "../assets/brand/kv-logo.png";
 
 const profiles = [
   { label: "GitHub", detail: "Interior-Gardener", href: profile.links.github, icon: "branch" as const },
@@ -11,13 +13,21 @@ const profiles = [
 
 <section class="section contact" id="contact" aria-labelledby="contact-title">
   <div class="shell">
-    <p class="section-index" data-reveal><span>08</span><span>Contact</span></p>
-    <h2 class="contact__title" id="contact-title" data-reveal style="--d:1">
-      Have something <span class="mark">worth building?</span>
-    </h2>
-    <p class="section-lede contact__lede" data-reveal style="--d:2">
-      I'm looking for software engineering and machine-learning internships. Email is the fastest way to reach me.
-    </p>
+    <div class="contact__top">
+      <div class="contact__intro">
+        <p class="section-index" data-reveal><span>08</span><span>Contact</span></p>
+        <h2 class="contact__title" id="contact-title" data-reveal data-split style="--d:1">
+          Have something <span class="mark">worth building?</span>
+        </h2>
+        <p class="section-lede contact__lede" data-reveal style="--d:2">
+          I'm looking for software engineering and machine-learning internships. Email is the fastest way to reach me.
+        </p>
+      </div>
+      <figure class="medallion" data-tilt aria-hidden="true">
+        <span class="medallion__glow"></span>
+        <Image src={brandLogo} alt="" widths={[380, 760]} sizes="(max-width: 960px) 190px, 25vw" />
+      </figure>
+    </div>
 
     <div class="contact__email" data-reveal style="--d:3">
       <a class="contact__address" href={`mailto:${profile.email}`}>{profile.email}</a>

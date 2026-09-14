@@ -33,7 +33,7 @@ function applyTheme(theme: Theme, persist: boolean): void {
     button.setAttribute("aria-label", label);
     button.title = label;
   });
-  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#07080a" : "#f1f2ee");
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#060609" : "#f3eee4");
   window.dispatchEvent(new CustomEvent<Theme>("themechange", { detail: theme }));
 }
 

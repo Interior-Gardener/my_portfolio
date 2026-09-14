@@ -1,21 +1,24 @@
 :root {
   color-scheme: light;
-  --bg: #f1f2ee;
-  --bg-raised: #fbfbf9;
-  --bg-sunken: #e6e8e2;
-  --ink: #0b0c0e;
-  --ink-2: #2e3238;
-  --muted: #595f67;
-  --line: rgb(11 12 14 / 0.1);
-  --line-strong: rgb(11 12 14 / 0.2);
-  --signal: #c8f53c;
-  --signal-ink: #0b0c0e;
-  --signal-text: #3b6600;
-  --field-dot: rgb(11 12 14 / 0.16);
-  --field-hot: #4d8a00;
-  --glass: rgb(251 251 249 / 0.74);
-  --shadow: 0 1px 2px rgb(11 12 14 / 0.04), 0 24px 60px -32px rgb(11 12 14 / 0.28);
-  --shadow-lg: 0 40px 90px -40px rgb(11 12 14 / 0.4);
+  --bg: #f3eee4;
+  --bg-raised: #fbf8f2;
+  --bg-sunken: #ebe3d5;
+  --ink: #100e0a;
+  --ink-2: #37312a;
+  --muted: #625a4f;
+  --line: rgb(16 14 10 / 0.1);
+  --line-strong: rgb(16 14 10 / 0.2);
+  --signal: #e8ab2e;
+  --signal-ink: #100e0a;
+  --signal-text: #7a5200;
+  --bg-base: #f3eee4;
+  --bg-c1: #f4dcaa;
+  --bg-c2: #d8e5ec;
+  --bg-c3: #eed1bd;
+  --bg-glow: #f2b544;
+  --glass: rgb(251 248 242 / 0.82);
+  --shadow: 0 1px 2px rgb(16 14 10 / 0.04), 0 24px 60px -32px rgb(16 14 10 / 0.28);
+  --shadow-lg: 0 40px 90px -40px rgb(16 14 10 / 0.4);
   --radius: 24px;
   --gutter: clamp(18px, 4vw, 48px);
   --nav-h: 60px;
@@ -27,20 +30,23 @@
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #07080a;
-  --bg-raised: #0f1114;
-  --bg-sunken: #15181c;
-  --ink: #eceef1;
-  --ink-2: #c3c8cf;
-  --muted: #8b919a;
-  --line: rgb(236 238 241 / 0.09);
-  --line-strong: rgb(236 238 241 / 0.18);
-  --signal: #cdfb45;
-  --signal-ink: #07080a;
-  --signal-text: #cdfb45;
-  --field-dot: rgb(236 238 241 / 0.12);
-  --field-hot: #cdfb45;
-  --glass: rgb(15 17 20 / 0.68);
+  --bg: #060609;
+  --bg-raised: #111015;
+  --bg-sunken: #18161c;
+  --ink: #f2ede4;
+  --ink-2: #cfc7ba;
+  --muted: #968d80;
+  --line: rgb(242 237 228 / 0.09);
+  --line-strong: rgb(242 237 228 / 0.18);
+  --signal: #f2b544;
+  --signal-ink: #060609;
+  --signal-text: #f2b544;
+  --bg-base: #060609;
+  --bg-c1: #0e1a2b;
+  --bg-c2: #1a1230;
+  --bg-c3: #2b1c0a;
+  --bg-glow: #f2b544;
+  --glass: rgb(17 16 21 / 0.78);
   --shadow: 0 1px 0 rgb(255 255 255 / 0.03) inset, 0 30px 70px -36px rgb(0 0 0 / 0.9);
   --shadow-lg: 0 50px 110px -40px rgb(0 0 0 / 0.95);
 }
@@ -61,12 +67,13 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 96px;
   background: var(--bg);
+  transition: background-color 0.4s ease;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--bg);
+  background: transparent;
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 17px;
@@ -216,44 +223,6 @@ ol {
   flex: none;
 }
 
-/* Background */
-
-.signal-field {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 1.2s ease;
-}
-
-.signal-field.is-ready {
-  opacity: 1;
-}
-
-.signal-glow {
-  position: fixed;
-  inset: -20vmax;
-  z-index: -2;
-  pointer-events: none;
-  background:
-    radial-gradient(38vmax 28vmax at 80% 14%, color-mix(in oklab, var(--signal) 13%, transparent), transparent 70%),
-    radial-gradient(34vmax 26vmax at 12% 88%, color-mix(in oklab, var(--signal) 7%, transparent), transparent 70%);
-  animation: glow-drift 28s ease-in-out infinite alternate;
-}
-
-:root[data-theme="light"] .signal-glow {
-  opacity: 0.75;
-}
-
-@keyframes glow-drift {
-  to {
-    transform: translate3d(-4vmax, 3vmax, 0) scale(1.08);
-  }
-}
-
 /* Buttons & chips */
 
 .btn {
@@ -272,6 +241,7 @@ ol {
   white-space: nowrap;
   transition:
     transform 0.35s var(--ease-out),
+    translate 0.5s var(--ease-out),
     background-color 0.25s ease,
     color 0.25s ease,
     border-color 0.25s ease,
@@ -316,10 +286,8 @@ ol {
 
 .btn--ghost {
   border-color: var(--line-strong);
-  background: color-mix(in oklab, var(--bg-raised) 55%, transparent);
+  background: color-mix(in oklab, var(--bg-raised) 72%, transparent);
   color: var(--ink);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
 }
 
 .btn--ghost:hover {
@@ -346,7 +314,7 @@ ol {
   border-radius: 999px;
   border: 1px solid var(--line);
   color: var(--ink);
-  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.3s var(--ease-out);
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.3s var(--ease-out), translate 0.5s var(--ease-out);
 }
 
 .icon-btn:hover {
@@ -505,32 +473,6 @@ ol {
   font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.02em;
-}
-
-.brand-mark {
-  position: relative;
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 999px;
-  background: var(--ink);
-  color: var(--bg);
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-}
-
-.brand-mark::after {
-  content: "";
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--signal);
 }
 
 .nav__links {
@@ -713,8 +655,6 @@ ol {
   border-radius: 999px;
   border: 1px solid var(--line-strong);
   background: var(--glass);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
   font-size: 14px;
   font-weight: 500;
 }
@@ -859,8 +799,6 @@ ol {
   border-radius: 20px;
   border: 1px solid var(--line);
   background: var(--glass);
-  -webkit-backdrop-filter: blur(14px);
-  backdrop-filter: blur(14px);
 }
 
 .tile__value {
@@ -912,9 +850,7 @@ ol {
 .marquee {
   overflow: hidden;
   border-block: 1px solid var(--line);
-  background: color-mix(in oklab, var(--bg) 72%, transparent);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
+  background: color-mix(in oklab, var(--bg) 78%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
 
@@ -2307,9 +2243,7 @@ ol {
 
 .site-footer {
   border-top: 1px solid var(--line);
-  background: color-mix(in oklab, var(--bg) 82%, transparent);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  background: color-mix(in oklab, var(--bg) 88%, transparent);
 }
 
 .site-footer__inner {
@@ -3503,8 +3437,6 @@ ol {
   border-radius: 28px;
   border: 1px solid var(--line);
   background: var(--glass);
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
 }
 
 .segmented {
@@ -3771,8 +3703,9 @@ ol {
   body::before,
   .skip-link,
   .nav,
-  .signal-field,
-  .signal-glow,
+  .bg-canvas,
+  .preloader,
+  .cursor,
   .site-footer,
   .resume-intro,
   .resume-toolbar,

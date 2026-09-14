@@ -1,0 +1,12 @@
+{
+  "name": "Kartik Verma",
+  "short_name": "Kartik Verma",
+  "description": "Software engineer building interactive, AI-powered systems.",
+  "icons": [
+    { "src": "/favicon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#060609",
+  "background_color": "#060609",
+  "display": "browser"
+}

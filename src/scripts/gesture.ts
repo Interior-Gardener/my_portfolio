@@ -62,6 +62,7 @@ function setupGestures(hud: HTMLElement, intro: HTMLDialogElement, cursor: HTMLE
   const point = { x: window.innerWidth / 2, y: window.innerHeight / 2, visible: false };
 
   const setToggles = (on: boolean) => {
+    document.documentElement.classList.toggle("gesture-active", on);
     toggles.forEach((toggle) => {
       toggle.setAttribute("aria-pressed", String(on));
       toggle.setAttribute("aria-label", on ? "Turn off Gesture Mode" : "Turn on Gesture Mode");

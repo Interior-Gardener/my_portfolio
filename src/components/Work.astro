@@ -66,8 +66,8 @@ const pad = (value: number) => String(value).padStart(2, "0");
               </div>
 
               <div class="work-card__media">
-                <a class="media-frame media-frame--main" href={`/work/${project.slug}`} tabindex="-1" aria-hidden="true">
-                  <Image src={media.cover.src} alt="" widths={[640, 960, 1400]} sizes="(max-width: 960px) 92vw, 56vw" loading={index === 0 ? "eager" : "lazy"} />
+                <a class="media-frame media-frame--main" href={`/work/${project.slug}`} tabindex="-1" aria-hidden="true" data-cursor="View">
+                  <Image src={media.cover.src} alt="" widths={[640, 960, 1400]} sizes="(max-width: 960px) 92vw, 56vw" loading={index === 0 ? "eager" : "lazy"} data-parallax />
                 </a>
                 <div class="media-frame media-frame--float" aria-hidden="true">
                   <Image src={secondary.src} alt="" widths={[420, 720]} sizes="(max-width: 960px) 46vw, 24vw" />
