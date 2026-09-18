@@ -1,10 +1,13 @@
 ---
+import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import { highlights, profile } from "../data/site";
+import { photos } from "../lib/media";
 
 const phrases = [
   "globes you steer by hand.",
   "chemistry labs you can't blow up.",
+  "herbal gardens grown from botany.",
   "hospital systems that see shortages coming.",
   "models that explain their predictions.",
 ];
@@ -18,10 +21,17 @@ const lastName = [..."Verma"];
     <span class="hero__place"><Icon name="pin" size={14} />{profile.location} · <span data-clock>--:--</span> IST</span>
   </div>
 
-  <h1 class="kinetic" id="hero-title" data-kinetic aria-label={profile.name}>
-    <span class="k-line" aria-hidden="true">{firstName.map((char) => <span class="k-char">{char}</span>)}</span>
-    <span class="k-line k-line--offset" aria-hidden="true">{lastName.map((char) => <span class="k-char">{char}</span>)}</span>
-  </h1>
+  <div class="hero__name">
+    <h1 class="kinetic" id="hero-title" data-kinetic aria-label={profile.name}>
+      <span class="k-line" aria-hidden="true">{firstName.map((char) => <span class="k-char">{char}</span>)}</span>
+      <span class="k-line k-line--offset" aria-hidden="true">{lastName.map((char) => <span class="k-char">{char}</span>)}</span>
+    </h1>
+    <a class="hero-avatar enter" href="#about" aria-label="About Kartik" style="--d:1">
+      <span class="hero-avatar__ring" aria-hidden="true"></span>
+      <Image src={photos.avatar.src} alt="" widths={[160, 320, 480]} sizes="(max-width: 560px) 76px, 200px" loading="eager" class="hero-avatar__img" />
+      <span class="hero-avatar__bubble" aria-hidden="true">Hi, I'm Kartik <span class="wave">👋</span></span>
+    </a>
+  </div>
 
   <div class="hero__below">
     <p class="hero__lede enter" style="--d:2">

@@ -55,7 +55,8 @@ export type Experience = {
   summary: string;
   bullets: string[];
   stack: string[];
-  stints?: { title: string; summary: string; metrics: Metric[] }[];
+  /** Separate positions at the same company, each listed as its own role on the résumé. */
+  stints?: { role: string; dates: string; title: string; summary: string; bullets: string[]; metrics: Metric[] }[];
 };
 
 export type Recognition = {
@@ -65,6 +66,8 @@ export type Recognition = {
   project?: string;
   year: string;
   kind: "award" | "showcase" | "certification" | "sport" | "letter";
+  /** Shown on the site but not on the one-page PDF résumé. */
+  webOnly?: boolean;
 };
 
 export const profile = {
@@ -72,7 +75,7 @@ export const profile = {
   headline: "Software engineer building interactive, AI-powered systems",
   tagline: "Building ideas. Creating impact.",
   description:
-    "Kartik Verma is a Computer Engineering (Honours in AI & ML) student in Mumbai who builds gesture-controlled web apps, VR simulations and machine-learning systems, with real numbers behind every project.",
+    "Kartik Verma is a Computer Engineering (Honours in AI & ML) student in Mumbai who builds gesture-controlled web apps, VR simulations, 3D web experiences and machine-learning systems, with real numbers behind every project.",
   location: "Mumbai, India",
   availability: "Open to software & ML internships",
   email: "kartikverma2204@gmail.com",
@@ -95,9 +98,9 @@ export const profile = {
 
 export const highlights: { value: string; count?: string; label: string }[] = [
   { value: "2", count: "2", label: "Competition podiums, including a national win" },
-  { value: "3", count: "3", label: "Internships: JSW Steel, Claidroid, Central Railway" },
+  { value: "4", count: "4", label: "Internships at JSW Steel, Claidroid and Central Railway" },
   { value: "9.04", count: "9.04", label: "CGPA, Honours in AI & ML" },
-  { value: "6", count: "6", label: "Shipped projects you can explore here" },
+  { value: "7", count: "7", label: "Shipped projects you can explore here" },
 ];
 
 export const education = {
@@ -135,32 +138,43 @@ export const experience: Experience[] = [
   {
     id: "claidroid",
     company: "Claidroid Technologies",
-    role: "Machine Learning Intern",
-    mode: "Remote · two virtual internships",
+    role: "Machine Learning Intern · AI Intern",
+    mode: "Remote · two internships",
     dates: "Jun 2025 – Jul 2025 · Dec 2025 – Jan 2026",
-    summary: "Two virtual internships, each shipping a complete machine-learning project from data to interface.",
+    summary:
+      "Two remote internships: first as a machine-learning intern, then back as an AI intern, each shipping a complete project from data to interface.",
     bullets: [
-      "Built and deployed an NLP-based college FAQ chatbot (Flask, scikit-learn, NLTK) covering 75 intents, using WordNet-based augmentation to expand training data to 3,200+ examples; benchmarked 5 classifier families with GridSearchCV, achieving 92.7% test accuracy with a tuned Random Forest.",
       "Built a hospital readmission risk prediction system (Streamlit, XGBoost, SHAP) trained on 100K+ patient records and 13 clinical features, achieving 85.2% accuracy and 88.9% AUC-ROC, with SHAP-based explainability and an interactive analytics dashboard.",
+      "Built and deployed an NLP-based college FAQ chatbot (Flask, scikit-learn, NLTK) covering 75 intents, using WordNet-based augmentation to expand training data to 3,200+ examples; benchmarked 5 classifier families with GridSearchCV, achieving 92.7% test accuracy with a tuned Random Forest.",
     ],
-    stack: ["scikit-learn", "NLTK", "Flask", "XGBoost", "SHAP", "Streamlit"],
+    stack: ["XGBoost", "SHAP", "Streamlit", "scikit-learn", "NLTK", "Flask"],
     stints: [
       {
-        title: "College FAQ chatbot",
-        summary:
-          "A 75-intent NLP classifier. WordNet synonym augmentation grew the training set to 3,200+ examples, and five classifier families were tuned with GridSearchCV.",
-        metrics: [
-          { value: "92.7%", label: "test accuracy" },
-          { value: "75", label: "intents" },
-        ],
-      },
-      {
+        role: "Machine Learning Intern",
+        dates: "Jun 2025 – Jul 2025",
         title: "Hospital readmission predictor",
         summary:
           "An XGBoost risk model trained on 100K+ patient records and 13 clinical features, explained with SHAP and wrapped in a Streamlit analytics dashboard.",
+        bullets: [
+          "Built a hospital readmission risk prediction system (Streamlit, XGBoost, SHAP) trained on 100K+ patient records and 13 clinical features, achieving 85.2% accuracy and 88.9% AUC-ROC, with SHAP-based explainability and an interactive analytics dashboard.",
+        ],
         metrics: [
           { value: "85.2%", label: "accuracy" },
           { value: "88.9%", label: "AUC-ROC" },
+        ],
+      },
+      {
+        role: "AI Intern",
+        dates: "Dec 2025 – Jan 2026",
+        title: "College FAQ chatbot",
+        summary:
+          "A 75-intent NLP classifier. WordNet synonym augmentation grew the training set to 3,200+ examples, and five classifier families were tuned with GridSearchCV.",
+        bullets: [
+          "Built and deployed an NLP-based college FAQ chatbot (Flask, scikit-learn, NLTK) covering 75 intents, using WordNet-based augmentation to expand training data to 3,200+ examples; benchmarked 5 classifier families with GridSearchCV, achieving 92.7% test accuracy with a tuned Random Forest.",
+        ],
+        metrics: [
+          { value: "92.7%", label: "test accuracy" },
+          { value: "75", label: "intents" },
         ],
       },
     ],
@@ -370,6 +384,99 @@ export const projects: Project[] = [
     tint: "167 139 250",
   },
   {
+    slug: "vanaspati",
+    name: "Vanaspati — Virtual Herbal Garden",
+    shortName: "Vanaspati",
+    tagline: "A 3D herbal garden where every plant is grown from its botanical description, including a walkable replica of my college's real Ayurvedic garden.",
+    category: "3D web · Procedural graphics · EdTech",
+    year: "2026",
+    role: "3D engineering, procedural plant generation and the Vanaspatyam campus replica",
+    timeline: "Aug 2026 – Sep 2026 · Smart India Hackathon problem statement",
+    summary:
+      "Vanaspati is an interactive 3D garden of 30 AYUSH medicinal plants that runs entirely in the browser. It holds two gardens: a teaching garden laid out by what the plants treat, and Vanaspatyam, a walkable replica of the Ayurvedic medicinal-plants garden on the Somaiya campus in Mumbai where my college, K. J. Somaiya Institute of Technology, stands.",
+    metrics: [
+      { value: "30", label: "medicinal species, grown from data" },
+      { value: "0", label: "downloaded 3D models" },
+      { value: "20", label: "beds replicated from the real garden" },
+      { value: "6", label: "narrated, camera-led tours" },
+    ],
+    stack: ["React 19", "TypeScript", "Three.js", "React Three Fiber", "Tailwind CSS 4", "Zustand", "Vite"],
+    links: {
+      live: { label: "Visit live site", href: "https://tushar-surti.github.io/virtual-herbal-garden/" },
+      code: { label: "Source code", href: "https://github.com/Interior-Gardener/virtual-herbal-garden" },
+    },
+    problem:
+      "Medicinal plants are taught from lists and herbarium photos. Students rarely see how a plant is built or which part carries the medicine, the Ayurvedic properties are memorised as words rather than understood, and most students never walk through a real herbal garden.",
+    approach:
+      "Grow every plant from its botanical description so the 3D model and the botany can never disagree, then plant them in two gardens: one arranged by what the plants treat, and a faithful copy of the real garden on my own campus that anyone can walk through from a browser.",
+    architecture: [
+      {
+        title: "Browser app",
+        nodes: [
+          { name: "React 19 + TypeScript", detail: "11 routes; every plant, bed and comparison is a shareable URL" },
+          { name: "Zustand store", detail: "Bookmarks, study notes and progress kept on the device" },
+        ],
+      },
+      {
+        title: "3D engine",
+        nodes: [
+          { name: "Procedural plant generator", detail: "Leaf shape, phyllotaxy, branching and flowers from data", highlight: true },
+          { name: "One shared foliage shader", detail: "Wind, venation and bark in a single program" },
+          { name: "Day–night cycle", detail: "One clock drives sky, sun, fog and fireflies" },
+        ],
+      },
+      {
+        title: "Knowledge",
+        nodes: [
+          { name: "30-species compendium", detail: "Botany, Ayurvedic profile, names in 11 languages, cautions" },
+          { name: "Ayurveda parser", detail: "Rasa, virya, vipaka and dosha charts read from the prose" },
+        ],
+      },
+      {
+        title: "Experiences",
+        nodes: [
+          { name: "Vanaspatyam replica", detail: "20 beds and the lily pond, walkable in first person", highlight: true },
+          { name: "Tours, atlas & quiz", detail: "6 narrated walks, data views, 40 click-the-plant questions" },
+        ],
+      },
+    ],
+    decisions: [
+      {
+        title: "Plants grown from their description, not downloaded",
+        body: "Every species is written as data: its archetype, height, leaf shape and arrangement, serration, branching and flower form. A seeded generator turns those numbers into geometry at run time, and the same numbers draw the 2D specimen plate on every card, so a square-stemmed mint really has a square stem and a neem frond really carries its leaflets.",
+        facts: [
+          "30 species with no 3D model files",
+          "Seeded, so a plant always grows the same way",
+          "The same data drives the 3D model and the 2D plate",
+          "A new species is about thirty lines of data",
+        ],
+      },
+      {
+        title: "Rebuilding a real garden from its plan",
+        body: "Vanaspatyam is the Ayurvedic medicinal-plants garden on my college campus, opened on 12 February 2016. I rebuilt it from its surveyed plan (30 m by 25 m, a south gate, a 2.2 m central spine and a lily pond closing the north end) and dressed it from photographs taken standing in it: red lateritic soil, brick-kerbed beds, white label boards on black posts and the transmission pylons everyone recognises first. Hover a bed's board and its printed plant card opens, laid out like the real ones.",
+        facts: [
+          "30 species in 20 beds and the pond",
+          "Bed positions derived from the plan and checked against each other",
+          "First-person walking with WASD and pointer lock",
+          "Printed plant cards recreated for every bed",
+        ],
+      },
+      {
+        title: "Fast enough for a classroom laptop",
+        body: "Each plant merges into at most six geometries, one per material, instead of hundreds of separate meshes. The lawn and bed planting are two instanced meshes of about 2,600 tufts, all foliage shares one compiled shader, and quality is detected from the device. There is no backend: narration uses the browser's own speech synthesis, and saved plants and notes never leave the visitor's device.",
+        compare: {
+          before: { value: "100s", label: "meshes per plant, unmerged" },
+          after: { value: "≤ 6", label: "geometries per plant, merged" },
+        },
+        facts: ["~2,600 grass tufts in 2 draw calls", "One shared foliage shader program", "Quality auto-detected, overridable in settings", "Works offline after the first load"],
+      },
+    ],
+    outcome:
+      "Built for the Smart India Hackathon's Virtual Herbal Garden problem statement. Vanaspati is live on GitHub Pages, and the Vanaspatyam replica lets anyone walk my college's Ayurvedic garden from a browser.",
+    resumeBullets: [],
+    tint: "74 190 120",
+  },
+  {
     slug: "hospital-ops-sync",
     name: "Hospital Operations Sync Platform",
     shortName: "Hospital Ops Sync",
@@ -500,6 +607,8 @@ export const recognition: Recognition[] = [
   { id: "aws", title: "AWS Academy Graduate", detail: "Cloud Foundations", year: "Certified", kind: "certification" },
   { id: "aiu", title: "All India University Matches, Squash", detail: "Represented KJSIT and the University of Mumbai", year: "2025–26", kind: "sport" },
   { id: "letters", title: "Letters of Appreciation", detail: "Somaiya, for CIIA-5 and AIU Squash", year: "2025–26", kind: "letter" },
+  { id: "kjsit-hackathon", title: "Winner, KJSIT Campus Hackathon", detail: "One of the winning teams", year: "2025", kind: "award", webOnly: true },
+  { id: "google-analytics", title: "Google Analytics Certification", detail: "Google · valid to Aug 2027", year: "2026", kind: "certification", webOnly: true },
 ];
 
 export type Skill = { id: string; name: string; projects: string[] };
@@ -514,17 +623,18 @@ export const skillGroups: { title: string; skills: Skill[] }[] = [
       { id: "sql", name: "SQL", projects: ["jsw", "hospital-ops-sync"] },
       { id: "java", name: "Java", projects: [] },
       { id: "c", name: "C", projects: [] },
+      { id: "typescript", name: "TypeScript", projects: ["vanaspati"] },
     ],
   },
   {
     title: "Web",
     skills: [
-      { id: "react", name: "React", projects: ["geoswipe", "hospital-ops-sync"] },
+      { id: "react", name: "React", projects: ["geoswipe", "vanaspati", "hospital-ops-sync"] },
       { id: "express", name: "Node.js & Express", projects: ["geoswipe"] },
       { id: "django", name: "Django REST", projects: ["hospital-ops-sync"] },
       { id: "flask", name: "Flask", projects: ["jsw", "chatbot"] },
       { id: "socketio", name: "Socket.IO", projects: ["geoswipe"] },
-      { id: "tailwind", name: "Tailwind CSS", projects: [] },
+      { id: "tailwind", name: "Tailwind CSS", projects: ["vanaspati"] },
       { id: "bootstrap", name: "Bootstrap", projects: [] },
     ],
   },
@@ -546,7 +656,8 @@ export const skillGroups: { title: string; skills: Skill[] }[] = [
     skills: [
       { id: "unity", name: "Unity 6", projects: ["atomix"] },
       { id: "unityxr", name: "Unity XR", projects: ["atomix"] },
-      { id: "threejs", name: "Three.js", projects: ["geoswipe"] },
+      { id: "threejs", name: "Three.js", projects: ["geoswipe", "vanaspati"] },
+      { id: "r3f", name: "React Three Fiber", projects: ["vanaspati"] },
       { id: "maplibre", name: "MapLibre GL", projects: ["geoswipe"] },
     ],
   },
@@ -556,7 +667,7 @@ export const skillGroups: { title: string; skills: Skill[] }[] = [
       { id: "mongodb", name: "MongoDB", projects: ["geoswipe"] },
       { id: "mysql", name: "MySQL", projects: ["hospital-ops-sync"] },
       { id: "oracle", name: "Oracle Database", projects: ["jsw"] },
-      { id: "git", name: "Git & GitHub", projects: ["geoswipe", "atomix", "hospital-ops-sync", "readmission", "chatbot", "jsw"] },
+      { id: "git", name: "Git & GitHub", projects: ["geoswipe", "atomix", "vanaspati", "hospital-ops-sync", "readmission", "chatbot", "jsw"] },
       { id: "cloudflare", name: "Cloudflare Pages", projects: ["geoswipe"] },
       { id: "aws", name: "AWS", projects: [] },
       { id: "docker", name: "Docker", projects: [] },
@@ -581,6 +692,7 @@ export const pages: { path: string; title: string }[] = [
   { path: "/", title: "Home" },
   { path: "/work/geoswipe", title: "GeoSwipe case study" },
   { path: "/work/atomix", title: "Atomix case study" },
+  { path: "/work/vanaspati", title: "Vanaspati case study" },
   { path: "/work/hospital-ops-sync", title: "Hospital Operations Sync Platform case study" },
   { path: "/resume", title: "Résumé" },
 ];

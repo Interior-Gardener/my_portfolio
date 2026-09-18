@@ -35,7 +35,14 @@ function buildKnowledge(): string {
   for (const job of experience) {
     out.push(`### ${job.role}, ${job.company} (${job.mode}), ${job.dates}`);
     out.push(job.summary);
-    for (const bullet of job.bullets) out.push(`- ${bullet}`);
+    if (job.stints) {
+      for (const stint of job.stints) {
+        out.push(`#### ${stint.role}, ${job.company}, ${stint.dates}: ${stint.title}`);
+        for (const bullet of stint.bullets) out.push(`- ${bullet}`);
+      }
+    } else {
+      for (const bullet of job.bullets) out.push(`- ${bullet}`);
+    }
   }
 
   out.push("", "## Flagship projects");
@@ -79,10 +86,13 @@ function buildKnowledge(): string {
   out.push("- Hospital Operations Sync Platform: 6 scikit-learn models (OPD wait time, stockout risk, days to stockout, profit, loss area), plus a rule-based weather-driven medicine-demand engine.");
   out.push("- GeoSwipe: MediaPipe's pretrained hand-landmark model running in the browser for gesture recognition, plus a Groq-hosted LLM assistant. No custom-trained model.");
   out.push("- Atomix: conversational AI through the Convai API with an offline rule-based fallback. No custom-trained model.");
+  out.push("- Vanaspati: no machine learning; it is procedural 3D graphics, generating every plant's geometry from structured botanical data in the browser.");
 
   out.push("", "## Recognition");
   for (const item of recognition) {
-    out.push(`- ${item.title}: ${item.detail}${item.project ? ` (project: ${item.project})` : ""}, ${item.year}.`);
+    out.push(
+      `- ${item.title}: ${item.detail}${item.project ? ` (project: ${item.project})` : ""}, ${item.year}.${item.webOnly ? " (Listed on this website; not on the one-page PDF résumé.)" : ""}`,
+    );
   }
 
   out.push("", "## Skills (as listed on the résumé)");

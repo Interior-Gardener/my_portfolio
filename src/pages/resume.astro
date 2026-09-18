@@ -4,6 +4,14 @@ import Icon from "../components/Icon.astro";
 import { education, experience, hobbies, profile, projects, recognition, resumeSkills } from "../data/site";
 
 const pdf = profile.links.resumePdf;
+// The web version mirrors the PDF: each Claidroid stint is its own role, and only résumé projects and awards appear.
+const positions = experience.flatMap((job) =>
+  job.stints
+    ? job.stints.map((stint) => ({ role: stint.role, company: job.company, mode: job.mode.split(" · ")[0], dates: stint.dates, bullets: stint.bullets }))
+    : [{ role: job.role, company: job.company, mode: job.mode, dates: job.dates, bullets: job.bullets }],
+);
+const resumeProjects = projects.filter((project) => project.resumeBullets.length > 0);
+const resumeRecognition = recognition.filter((item) => !item.webOnly);
 ---
 
 <Base title="Résumé" description="Kartik Verma's résumé: education, internships at JSW Steel, Claidroid Technologies and Central Railway, flagship projects, skills and awards.">
@@ -12,7 +20,7 @@ const pdf = profile.links.resumePdf;
       <a class="back-link" href="/"><Icon name="arrow-left" size={16} />Home</a>
       <h1 class="section-title" data-reveal data-split>Résumé</h1>
       <p class="section-lede" data-reveal style="--d:1">
-        Education, three internships and flagship projects on a single page. Read the web version, view the original PDF, or download it.
+        Education, four internships and flagship projects on a single page. Read the web version, view the original PDF, or download it.
       </p>
     </header>
 
@@ -53,7 +61,7 @@ const pdf = profile.links.resumePdf;
 
         <section class="sheet__section">
           <h3>Work experience</h3>
-          {experience.map((job) => (
+          {positions.map((job) => (
             <div class="sheet__entry">
               <div class="sheet__row"><strong>{job.role} · {job.company}</strong><span>{job.dates}</span></div>
               <p class="sheet__muted">{job.mode}</p>
@@ -64,7 +72,7 @@ const pdf = profile.links.resumePdf;
 
         <section class="sheet__section">
           <h3>Projects</h3>
-          {projects.map((project) => (
+          {resumeProjects.map((project) => (
             <div class="sheet__entry">
               <div class="sheet__row"><strong><a href={`/work/${project.slug}`}>{project.name}</a></strong><span>{project.year}</span></div>
               <ul>{project.resumeBullets.map((bullet) => <li>{bullet}</li>)}</ul>
@@ -87,7 +95,7 @@ const pdf = profile.links.resumePdf;
         <section class="sheet__section">
           <h3>Achievements &amp; certifications</h3>
           <ul>
-            {recognition.map((item) => (
+            {resumeRecognition.map((item) => (
               <li>
                 <strong>{item.title}</strong>, {item.detail}{item.project ? ` (${item.project})` : ""}{item.kind === "certification" ? "" : `, ${item.year}`}
               </li>

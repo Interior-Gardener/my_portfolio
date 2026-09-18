@@ -14,6 +14,14 @@ import atomix05 from "../assets/work/atomix/05.png";
 import atomix06 from "../assets/work/atomix/06.png";
 import atomix07 from "../assets/work/atomix/07.png";
 import atomix08 from "../assets/work/atomix/08.png";
+import vanaspati01 from "../assets/work/vanaspati/01.jpg";
+import vanaspati02 from "../assets/work/vanaspati/02.jpg";
+import vanaspati03 from "../assets/work/vanaspati/03.jpg";
+import vanaspati04 from "../assets/work/vanaspati/04.jpg";
+import vanaspati05 from "../assets/work/vanaspati/05.jpg";
+import vanaspati06 from "../assets/work/vanaspati/06.jpg";
+import vanaspati07 from "../assets/work/vanaspati/07.jpg";
+import vanaspati08 from "../assets/work/vanaspati/08.jpg";
 import hospital01 from "../assets/work/hospital/01.png";
 import hospital02 from "../assets/work/hospital/02.png";
 import hospital04 from "../assets/work/hospital/04.png";
@@ -22,7 +30,9 @@ import hospital08 from "../assets/work/hospital/08.png";
 import hospital11 from "../assets/work/hospital/11.png";
 import hospital13 from "../assets/work/hospital/13.png";
 
-import portrait from "../assets/photos/kartik-portrait.jpeg";
+import desk from "../assets/photos/kartik-desk.jpg";
+import avatar from "../assets/photos/kartik-avatar.png";
+import medallion from "../assets/photos/kartik-medallion.png";
 import summit from "../assets/photos/kartik-summit-2.jpeg";
 import atJsw from "../assets/photos/kartik-at-jsw.jpeg";
 import jswTeam from "../assets/photos/jsw-team.jpg";
@@ -113,6 +123,50 @@ export const workMedia: Record<string, { cover: Shot; gallery: Shot[] }> = {
       },
     ],
   },
+  vanaspati: {
+    cover: {
+      src: vanaspati01,
+      alt: "Aerial view of the Vanaspatyam replica at dusk: ranks of brick-kerbed beds with white label boards either side of a central spine, a lily pond at the far end and transmission pylons overhead",
+      caption: "Vanaspatyam, my college’s Ayurvedic garden, rebuilt from its plan",
+    },
+    gallery: [
+      {
+        src: vanaspati02,
+        alt: "A bed’s printed plant card for Nityakalyani (Catharanthus roseus) with Marathi and Hindi names, Ayurvedic properties and two photographs",
+        caption: "Hover a bed’s board and its printed plant card opens",
+      },
+      {
+        src: vanaspati03,
+        alt: "The procedurally generated learning garden at dusk, with six themed circular beds around a fountain",
+        caption: "The learning garden: six beds arranged by what the plants treat",
+      },
+      {
+        src: vanaspati04,
+        alt: "The gateway page offering two doors: the Vanaspati learning garden and the Vanaspatyam replica of a real garden in Mumbai",
+        caption: "Two gardens, the same plants",
+      },
+      {
+        src: vanaspati07,
+        alt: "A narrated guided tour stopping at tulsi, with the camera framing the plant and the tour card below",
+        caption: "Narrated, camera-led guided tours",
+      },
+      {
+        src: vanaspati06,
+        alt: "A quiz question asking the visitor to click the correct plant in the 3D garden",
+        caption: "A quiz you answer by clicking the plant in 3D",
+      },
+      {
+        src: vanaspati05,
+        alt: "The atlas constellation linking every plant to the complaints it treats",
+        caption: "The atlas: every plant linked to what it treats",
+      },
+      {
+        src: vanaspati08,
+        alt: "The compendium of 30 medicinal plants in dark mode, with generated specimen plates beside photographs",
+        caption: "30 plants, each with a generated specimen plate",
+      },
+    ],
+  },
   "hospital-ops-sync": {
     cover: {
       src: hospital01,
@@ -155,7 +209,13 @@ export const workMedia: Record<string, { cover: Shot; gallery: Shot[] }> = {
 };
 
 export const photos = {
-  portrait: { src: portrait, alt: "Portrait of Kartik Verma", caption: "" },
+  desk: {
+    src: desk,
+    alt: "Illustrated portrait of Kartik at his desk, smiling with his chin on his hand beside a laptop, books and a One Piece figure",
+    caption: "",
+  },
+  avatar: { src: avatar, alt: "Kartik Verma", caption: "" },
+  medallion: { src: medallion, alt: "Illustrated portrait of Kartik at his desk", caption: "" },
   summit: { src: summit, alt: "Kartik smiling on a hilltop with mountains behind him", caption: "Off the keyboard" },
   atJsw: {
     src: atJsw,

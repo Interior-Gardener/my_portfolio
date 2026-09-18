@@ -8,11 +8,12 @@ import { photos } from "../lib/media";
 <section class="section" id="about" aria-labelledby="about-title">
   <div class="shell about">
     <div class="about__photos" data-reveal>
-      <figure class="about__photo">
-        <Image src={photos.portrait.src} alt={photos.portrait.alt} widths={[420, 760]} sizes="(max-width: 960px) 60vw, 24vw" data-parallax />
+      <figure class="about__photo about__photo--main" data-tilt data-mask style="--mask-r:28px">
+        <Image src={photos.desk.src} alt={photos.desk.alt} widths={[520, 900, 1254]} sizes="(max-width: 960px) 88vw, 38vw" />
       </figure>
-      <figure class="about__photo about__photo--wide">
-        <Image src={photos.summit.src} alt={photos.summit.alt} widths={[480, 900]} sizes="(max-width: 960px) 80vw, 30vw" data-parallax />
+      <figure class="about__photo about__photo--polaroid">
+        <Image src={photos.summit.src} alt={photos.summit.alt} widths={[360, 640]} sizes="(max-width: 960px) 46vw, 18vw" />
+        <figcaption>Off the keyboard</figcaption>
       </figure>
     </div>
 

@@ -1,0 +1,423 @@
+/* Hero avatar */
+
+.hero__name {
+  --kfs: clamp(72px, min(15vw, 26svh), 250px);
+  --indent: clamp(0px, 24vw, 420px);
+  --av: min(calc(var(--kfs) * 0.74), calc(var(--indent) * 0.86));
+  position: relative;
+}
+
+.hero__name .kinetic {
+  font-size: var(--kfs);
+}
+
+.hero-avatar {
+  position: absolute;
+  top: calc(var(--kfs) * 0.8 + (var(--kfs) * 0.8 - var(--av)) / 2 + var(--kfs) * 0.05);
+  left: calc((var(--indent) - var(--av)) / 2 - var(--kfs) * 0.04);
+  z-index: 1;
+  width: var(--av);
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.hero-avatar__img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow:
+    0 0 0 3px var(--bg),
+    0 26px 50px -24px rgb(0 0 0 / 0.55);
+  transition:
+    scale 0.6s var(--ease-out),
+    rotate 0.6s var(--ease-out);
+}
+
+.hero-avatar__ring {
+  position: absolute;
+  inset: -9%;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--signal), transparent 30%, var(--signal) 50%, transparent 80%, var(--signal));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1.5px));
+  animation: avatar-spin 9s linear infinite;
+  transition: inset 0.6s var(--ease-out);
+}
+
+.hero-avatar__bubble {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 60%;
+  padding: 7px 12px;
+  border-radius: 14px 14px 14px 4px;
+  background: var(--ink);
+  color: var(--bg);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  scale: 0.6;
+  translate: -10px 10px;
+  transform-origin: 0 100%;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    scale 0.5s var(--ease-out),
+    translate 0.5s var(--ease-out);
+}
+
+.hero-avatar__bubble .wave {
+  display: inline-block;
+  transform-origin: 70% 70%;
+}
+
+.hero-avatar:hover .hero-avatar__img,
+.hero-avatar:focus-visible .hero-avatar__img {
+  scale: 1.06;
+  rotate: -5deg;
+}
+
+.hero-avatar:hover .hero-avatar__ring,
+.hero-avatar:focus-visible .hero-avatar__ring {
+  inset: -13%;
+  animation-duration: 2.4s;
+}
+
+.hero-avatar:hover .hero-avatar__bubble,
+.hero-avatar:focus-visible .hero-avatar__bubble {
+  opacity: 1;
+  scale: 1;
+  translate: 0 0;
+}
+
+.hero-avatar:hover .wave {
+  animation: wave 1.2s ease-in-out 0.2s;
+}
+
+@keyframes avatar-spin {
+  to {
+    rotate: 1turn;
+  }
+}
+
+@keyframes wave {
+  20%,
+  60% {
+    rotate: 16deg;
+  }
+  40%,
+  80% {
+    rotate: -8deg;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero__name {
+    --indent: 14vw;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero__name {
+    --av: 76px;
+  }
+
+  .hero-avatar {
+    top: calc((var(--kfs) * 0.8 - var(--av)) / 2 + 4px);
+    right: 4px;
+    left: auto;
+  }
+
+  .hero-avatar__bubble {
+    left: auto;
+    right: 40%;
+    border-radius: 14px 14px 4px 14px;
+    transform-origin: 100% 100%;
+  }
+}
+
+/* About photos */
+
+.about__photos {
+  position: relative;
+  display: block;
+  padding-bottom: 18%;
+}
+
+.about__photo--main {
+  --rx: 0deg;
+  --ry: 0deg;
+  width: 88%;
+  border-radius: 28px;
+  transform: perspective(1200px) rotateX(calc(var(--rx) * 0.4)) rotateY(calc(var(--ry) * 0.4));
+}
+
+.about__photo--polaroid {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 46%;
+  padding: 8px 8px 10px;
+  border-radius: 18px;
+  background: var(--bg-raised);
+  box-shadow: var(--shadow-lg);
+  rotate: 4deg;
+  transition:
+    rotate 0.7s var(--ease-out),
+    scale 0.7s var(--ease-out);
+}
+
+.about__photo--polaroid img {
+  border-radius: 12px;
+}
+
+.about__photo--polaroid figcaption {
+  padding: 8px 4px 0;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.about__photos:hover .about__photo--polaroid {
+  rotate: -2deg;
+  scale: 1.04;
+}
+
+/* Footer watermark */
+
+.footer-mark {
+  overflow: hidden;
+  margin-top: -12px;
+  padding-inline: var(--gutter);
+  user-select: none;
+}
+
+.footer-mark__text {
+  font-family: var(--font-display);
+  font-size: clamp(64px, 15.5vw, 300px);
+  line-height: 0.78;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+  text-align: center;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in oklab, var(--ink) 28%, transparent);
+  translate: 0 10%;
+}
+
+/* Until the footer scrolls into view the letters hold a bold gold pose, then exhale into an outline. */
+.footer-mark .k-char {
+  color: color-mix(in oklab, var(--signal) calc(var(--t, 0.8) * 100%), transparent);
+  -webkit-text-stroke-color: color-mix(in oklab, var(--signal) calc(var(--t, 0.8) * 100%), color-mix(in oklab, var(--ink) 28%, transparent));
+  font-variation-settings:
+    "wght" var(--w, 700),
+    "wdth" var(--wd, 90),
+    "opsz" 96;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-mark .k-char {
+    --t: 0;
+    --w: 330;
+    --wd: 75;
+  }
+}
+
+.footer-mark__gap {
+  display: inline-block;
+  width: 0.22em;
+}
+
+/* Section-title letters react to the pointer */
+
+.split-c {
+  display: inline-block;
+  translate: 0 calc(var(--lift, 0) * -0.1em);
+  transition:
+    translate 0.45s var(--ease-out),
+    color 0.45s ease;
+}
+
+.is-split .split-c[style*="--lift"] {
+  color: color-mix(in oklab, var(--signal-text) calc(var(--lift, 0) * 100%), currentColor);
+}
+
+/* Label roll on buttons and links */
+
+.roll {
+  position: relative;
+  display: inline-grid;
+  overflow: hidden;
+  padding-block: 0.12em;
+  margin-block: -0.12em;
+}
+
+.roll__a,
+.roll__b {
+  grid-area: 1 / 1;
+  transition: translate 0.55s var(--ease-out);
+}
+
+.roll__b {
+  translate: 0 110%;
+}
+
+:is(.btn, .nav__links a, .site-footer__nav a):hover .roll__a {
+  translate: 0 -110%;
+}
+
+:is(.btn, .nav__links a, .site-footer__nav a):hover .roll__b {
+  translate: 0 0;
+}
+
+/* Cursor spotlight on cards */
+
+@property --spot {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 0%;
+}
+
+:is(.panel, .tile, .work-card) {
+  --spot: 0%;
+  background-image: radial-gradient(
+    460px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in oklab, var(--signal) calc(var(--spot) * 0.11), transparent),
+    transparent 62%
+  );
+}
+
+:is(.panel, .tile, .work-card).is-spot {
+  --spot: 100%;
+}
+
+.award-feature {
+  --spot: 0%;
+  background-image: radial-gradient(
+    420px circle at var(--mx, 50%) var(--my, 50%),
+    rgb(255 255 255 / calc(var(--spot) * 0.28)),
+    transparent 60%
+  );
+}
+
+.award-feature.is-spot {
+  --spot: 100%;
+}
+
+/* Animated underline on arrow links */
+
+.link-arrow {
+  padding-bottom: 3px;
+  text-decoration: none;
+  background:
+    linear-gradient(var(--signal-text), var(--signal-text)) 0 100% / 0% 1.5px no-repeat,
+    linear-gradient(var(--line-strong), var(--line-strong)) 0 100% / 100% 1px no-repeat;
+  transition: background-size 0.55s var(--ease-out);
+}
+
+.link-arrow:hover {
+  background-size:
+    100% 1.5px,
+    100% 1px;
+}
+
+.link-arrow .icon {
+  transition: transform 0.45s var(--ease-out);
+}
+
+.link-arrow:hover .icon {
+  transform: translate(2px, -2px);
+}
+
+/* Image mask reveal */
+
+.reveal-ready [data-mask] {
+  clip-path: inset(10% 7% 10% 7% round var(--mask-r, 18px));
+  transition: clip-path 1.3s var(--ease-out);
+}
+
+.reveal-ready [data-mask].is-in {
+  clip-path: inset(0 round var(--mask-r, 18px));
+}
+
+.reveal-ready [data-mask].is-masked {
+  clip-path: none;
+}
+
+/* Scroll progress */
+
+.scroll-progress {
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 60;
+    display: block;
+    height: 2px;
+    background: linear-gradient(90deg, color-mix(in oklab, var(--signal) 40%, transparent), var(--signal));
+    transform-origin: 0 50%;
+    pointer-events: none;
+    animation: scroll-progress linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes scroll-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Sliding nav pill */
+
+.nav__links {
+  position: relative;
+}
+
+.nav__pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--bg-sunken);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    translate 0.5s var(--ease-out),
+    width 0.5s var(--ease-out),
+    opacity 0.25s ease;
+}
+
+.nav__links.has-pill a {
+  position: relative;
+  z-index: 1;
+  background: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-avatar__ring {
+    animation: none;
+  }
+
+  .about__photo--main {
+    transform: none;
+  }
+}
+
+@media print {
+  .scroll-progress,
+  .footer-mark {
+    display: none;
+  }
+}

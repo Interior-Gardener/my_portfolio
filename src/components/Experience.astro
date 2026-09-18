@@ -20,7 +20,7 @@ const jswPhotos = await Promise.all(
       eyebrow="Experience"
       id="experience-title"
       title="Where I've shipped"
-      lede="Three internships across heavy industry, machine learning and public infrastructure."
+      lede="Four internships at three companies, across heavy industry, machine learning and public infrastructure."
     />
 
     <div class="timeline" data-timeline>
@@ -44,9 +44,9 @@ const jswPhotos = await Promise.all(
                 <p class="xp__summary">{job.summary}</p>
                 {job.stints ? (
                   <div class="xp__stints">
-                    {job.stints.map((stint, index) => (
+                    {job.stints.map((stint) => (
                       <article class="stint">
-                        <p class="eyebrow">Internship {index + 1}</p>
+                        <p class="eyebrow">{stint.role} · {stint.dates}</p>
                         <h4 class="stint__title">{stint.title}</h4>
                         <p class="stint__summary">{stint.summary}</p>
                         <dl class="stint__metrics">

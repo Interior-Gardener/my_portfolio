@@ -27,6 +27,31 @@ if (nav) {
     });
   }
 
+  // A pill that slides to whichever link is hovered, and rests on the current section.
+  const linkBar = nav.querySelector<HTMLElement>(".nav__links");
+  let movePill: (target?: HTMLElement | null) => void = () => {};
+  if (linkBar && !reducedMotion) {
+    const pill = document.createElement("span");
+    pill.className = "nav__pill";
+    pill.setAttribute("aria-hidden", "true");
+    linkBar.prepend(pill);
+    linkBar.classList.add("has-pill");
+    const current = () => linkBar.querySelector<HTMLElement>("a[aria-current]");
+    movePill = (target = current()) => {
+      if (!target) {
+        pill.style.opacity = "0";
+        return;
+      }
+      pill.style.opacity = "1";
+      pill.style.width = `${target.offsetWidth}px`;
+      pill.style.translate = `${target.offsetLeft}px 0`;
+    };
+    linkBar.querySelectorAll<HTMLElement>("a").forEach((link) => link.addEventListener("pointerenter", () => movePill(link)));
+    linkBar.addEventListener("pointerleave", () => movePill());
+    window.addEventListener("resize", () => movePill());
+    requestAnimationFrame(() => movePill());
+  }
+
   const links = [...nav.querySelectorAll<HTMLAnchorElement>("[data-section-link]")];
   const sections = links
     .map((link) => document.getElementById(link.dataset.sectionLink ?? ""))
@@ -40,6 +65,7 @@ if (nav) {
             if (link.dataset.sectionLink === entry.target.id) link.setAttribute("aria-current", "true");
             else link.removeAttribute("aria-current");
           }
+          if (!linkBar?.matches(":hover")) movePill();
         }
       },
       { rootMargin: "-45% 0px -50% 0px" },
@@ -75,7 +101,7 @@ document.addEventListener("keydown", (event) => {
   openDialog.close();
 });
 
-const revealTargets = document.querySelectorAll<HTMLElement>("[data-reveal]");
+const revealTargets = document.querySelectorAll<HTMLElement>("[data-reveal], [data-mask]");
 const counters = document.querySelectorAll<HTMLElement>("[data-count]");
 if ("IntersectionObserver" in window && !reducedMotion) {
   document.documentElement.classList.add("reveal-ready");
@@ -83,8 +109,18 @@ if ("IntersectionObserver" in window && !reducedMotion) {
     (entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
-        entry.target.classList.add("is-in");
-        revealObserver.unobserve(entry.target);
+        const target = entry.target as HTMLElement;
+        target.classList.add("is-in");
+        revealObserver.unobserve(target);
+        // Once an image has unmasked, drop the clip so its shadow and hover effects are not cut off.
+        if (target.hasAttribute("data-mask")) {
+          const done = (event: TransitionEvent) => {
+            if (event.target !== target || event.propertyName !== "clip-path") return;
+            target.classList.add("is-masked");
+            target.removeEventListener("transitionend", done);
+          };
+          target.addEventListener("transitionend", done);
+        }
       }
     },
     { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },

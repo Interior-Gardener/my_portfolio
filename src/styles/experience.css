@@ -75,16 +75,52 @@
   perspective: 1000px;
 }
 
-.medallion img {
+@property --flip {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+.medallion {
+  --flip: 0deg;
+  cursor: pointer;
+  transition: --flip 1.1s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.medallion:hover,
+.medallion.is-flipped {
+  --flip: 180deg;
+}
+
+.medallion.is-flipped:hover {
+  --flip: 180deg;
+}
+
+.medallion__coin {
   position: relative;
+  display: grid;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--rx)) rotateY(calc(var(--ry) + var(--flip)));
+  animation: medallion-float 7s ease-in-out infinite;
+}
+
+.medallion__face {
+  grid-area: 1 / 1;
   width: 100%;
   height: auto;
   border-radius: 50%;
-  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   box-shadow:
     0 0 0 1px color-mix(in oklab, var(--signal) 45%, transparent),
     0 50px 90px -40px rgb(0 0 0 / 0.6);
-  animation: medallion-float 7s ease-in-out infinite;
+}
+
+.medallion__face--back {
+  transform: rotateY(180deg);
+  box-shadow:
+    0 0 0 3px var(--signal),
+    0 50px 90px -40px rgb(0 0 0 / 0.6);
 }
 
 .medallion__glow {
@@ -460,7 +496,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .medallion img,
+  .medallion__coin,
   .medallion__glow {
     animation: none;
   }

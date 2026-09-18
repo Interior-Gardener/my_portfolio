@@ -5,15 +5,22 @@ type PointerDetail = { x: number; y: number; active: boolean };
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const POINTER_IDLE_MS = 2500;
 
-const title = document.querySelector<HTMLElement>("[data-kinetic]");
-if (title && !reducedMotion) {
+/**
+ * Variable-font letters that swell toward the pointer. The hero name rests in a
+ * gentle wave; other instances (the footer watermark) rest flat and can tint gold.
+ */
+function initKinetic(title: HTMLElement) {
   const chars = [...title.querySelectorAll<HTMLElement>(".k-char")];
+  const flatRest = title.dataset.kineticRest === "flat";
+  const reach = Number(title.dataset.kineticRange ?? 340);
+  const tint = title.hasAttribute("data-kinetic-tint");
   const state = chars.map((_, index) => ({
     weight: 700,
     width: 90,
     appliedWeight: 700,
     appliedWidth: 90,
-    rest: ((Math.sin(-index * 0.55) + 1) / 2) * 0.6,
+    appliedTint: -1,
+    rest: flatRest ? 0 : ((Math.sin(-index * 0.55) + 1) / 2) * 0.6,
   }));
   const pointer = { x: -1e4, y: -1e4, movedAt: -Infinity };
   let visible = true;
@@ -42,7 +49,7 @@ if (title && !reducedMotion) {
       if (rects) {
         const rect = rects[index]!;
         const d = Math.hypot(pointer.x - (rect.left + rect.width / 2), pointer.y - (rect.top + rect.height / 2));
-        const raw = Math.max(0, 1 - d / 340);
+        const raw = Math.max(0, 1 - d / reach);
         t = Math.max(current.rest * 0.5, raw * raw * (3 - 2 * raw));
       }
 
@@ -61,6 +68,13 @@ if (title && !reducedMotion) {
       if (width !== current.appliedWidth) {
         current.appliedWidth = width;
         char.style.setProperty("--wd", String(width));
+      }
+      if (tint) {
+        const amount = Math.round(((current.weight - 330) / 470) * 20) / 20;
+        if (amount !== current.appliedTint) {
+          current.appliedTint = amount;
+          char.style.setProperty("--t", String(Math.max(0, amount)));
+        }
       }
     });
 
@@ -86,6 +100,8 @@ if (title && !reducedMotion) {
 
   schedule();
 }
+
+if (!reducedMotion) document.querySelectorAll<HTMLElement>("[data-kinetic]").forEach(initKinetic);
 
 const rotator = document.querySelector<HTMLElement>("[data-rotator]");
 if (rotator && !reducedMotion) {

@@ -32,8 +32,12 @@ const geoswipe = projects[0]!;
         <p class="paper__heading">Experience</p>
         <div class="paper__row"><strong>{jsw.role} · {jsw.company}</strong><span>{jsw.dates}</span></div>
         <ul>{jsw.bullets.map((bullet) => <li>{bullet}</li>)}</ul>
-        <div class="paper__row"><strong>{claidroid.role} · {claidroid.company}</strong><span>Two internships</span></div>
-        <ul>{claidroid.bullets.map((bullet) => <li>{bullet}</li>)}</ul>
+        {(claidroid.stints ?? []).map((stint) => (
+          <>
+            <div class="paper__row"><strong>{stint.role} · {claidroid.company}</strong><span>{stint.dates}</span></div>
+            <ul>{stint.bullets.map((bullet) => <li>{bullet}</li>)}</ul>
+          </>
+        ))}
         <p class="paper__heading">Projects</p>
         <div class="paper__row"><strong>{geoswipe.name}</strong><span>{geoswipe.year}</span></div>
         <ul>{geoswipe.resumeBullets.map((bullet) => <li>{bullet}</li>)}</ul>

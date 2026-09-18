@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import Icon from "./Icon.astro";
 import { profile } from "../data/site";
 import brandLogo from "../assets/brand/kv-logo.png";
+import { photos } from "../lib/media";
 
 const profiles = [
   { label: "GitHub", detail: "Interior-Gardener", href: profile.links.github, icon: "branch" as const },
@@ -23,9 +24,12 @@ const profiles = [
           I'm looking for software engineering and machine-learning internships. Email is the fastest way to reach me.
         </p>
       </div>
-      <figure class="medallion" data-tilt aria-hidden="true">
+      <figure class="medallion" data-tilt aria-hidden="true" data-cursor="Flip">
         <span class="medallion__glow"></span>
-        <Image src={brandLogo} alt="" widths={[380, 760]} sizes="(max-width: 960px) 190px, 25vw" />
+        <span class="medallion__coin">
+          <Image src={brandLogo} alt="" widths={[380, 760]} sizes="(max-width: 960px) 190px, 25vw" class="medallion__face" />
+          <Image src={photos.medallion.src} alt="" widths={[380, 760]} sizes="(max-width: 960px) 190px, 25vw" class="medallion__face medallion__face--back" />
+        </span>
       </figure>
     </div>
 

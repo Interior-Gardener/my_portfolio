@@ -35,4 +35,10 @@ const links = [
       <a class="link-arrow" href="#main">Back to top <Icon name="arrow-up" /></a>
     </div>
   </div>
+
+  <div class="footer-mark" aria-hidden="true">
+    <p class="footer-mark__text" data-kinetic data-kinetic-rest="flat" data-kinetic-range="300" data-kinetic-tint>
+      {[...profile.name].map((char) => (char === " " ? <span class="footer-mark__gap"> </span> : <span class="k-char">{char}</span>))}
+    </p>
+  </div>
 </footer>

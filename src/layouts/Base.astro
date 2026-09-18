@@ -4,6 +4,7 @@ import "@fontsource-variable/onest";
 import "@fontsource-variable/martian-mono";
 import "../styles/global.css";
 import "../styles/experience.css";
+import "../styles/flourish.css";
 import { getImage } from "astro:assets";
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
@@ -107,6 +108,7 @@ const introLogo = await getImage({ src: brandLogo, width: 460, format: "webp" })
     </div>
 
     <a class="skip-link" href="#main">Skip to content</a>
+    <div class="scroll-progress" aria-hidden="true"></div>
     <canvas class="bg-canvas" data-bg aria-hidden="true"></canvas>
 
     <Nav mode={navMode} />
