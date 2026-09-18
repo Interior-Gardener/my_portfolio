@@ -97,7 +97,7 @@ export const profile = {
 };
 
 export const highlights: { value: string; count?: string; label: string }[] = [
-  { value: "2", count: "2", label: "Competition podiums, including a national win" },
+  { value: "4", count: "4", label: "Competition podiums, including a national win" },
   { value: "4", count: "4", label: "Internships at JSW Steel, Claidroid and Central Railway" },
   { value: "9.04", count: "9.04", label: "CGPA, Honours in AI & ML" },
   { value: "7", count: "7", label: "Shipped projects you can explore here" },
@@ -401,6 +401,7 @@ export const projects: Project[] = [
       { value: "6", label: "narrated, camera-led tours" },
     ],
     stack: ["React 19", "TypeScript", "Three.js", "React Three Fiber", "Tailwind CSS 4", "Zustand", "Vite"],
+    award: "Runner-up of 100 teams, KJSIT Internal Hackathon 2026",
     links: {
       live: { label: "Visit live site", href: "https://tushar-surti.github.io/virtual-herbal-garden/" },
       code: { label: "Source code", href: "https://github.com/Interior-Gardener/virtual-herbal-garden" },
@@ -472,7 +473,7 @@ export const projects: Project[] = [
       },
     ],
     outcome:
-      "Built for the Smart India Hackathon's Virtual Herbal Garden problem statement. Vanaspati is live on GitHub Pages, and the Vanaspatyam replica lets anyone walk my college's Ayurvedic garden from a browser.",
+      "Runner-up out of 100 teams at my college's internal hackathon in 2026, built for the Smart India Hackathon's Virtual Herbal Garden problem statement. Vanaspati is live on GitHub Pages, and the Vanaspatyam replica lets anyone walk my college's Ayurvedic garden from a browser.",
     resumeBullets: [],
     tint: "74 190 120",
   },
@@ -494,6 +495,7 @@ export const projects: Project[] = [
       { value: "11", label: "feature modules" },
     ],
     stack: ["Django REST Framework", "React", "MySQL", "scikit-learn", "JWT", "Razorpay"],
+    award: "Top 20 teams, Thadomal Shahani Engineering College hackathon",
     links: {
       code: { label: "Source code", href: "https://github.com/Interior-Gardener/Hospital-Operations-Sync-Platform" },
     },
@@ -549,7 +551,7 @@ export const projects: Project[] = [
       },
     ],
     outcome:
-      "Built end to end as a hackathon project: a working platform covering OPD queues, beds, admissions, inventory, inter-hospital sharing and billing. The full source is on GitHub.",
+      "Built end to end as a hackathon project, finishing among the top 20 teams at the Thadomal Shahani Engineering College hackathon: a working platform covering OPD queues, beds, admissions, inventory, inter-hospital sharing and billing. The full source is on GitHub.",
     resumeBullets: [
       "Engineered a full-stack hospital operations platform (Django REST Framework, React, MySQL) with 11 feature modules across a 33-table schema, serving 4 role-based dashboards (Doctor, Nurse, Admin, Receptionist) for real-time bed occupancy, OPD queue management and inter-hospital capacity sharing.",
       "Trained and deployed 6 scikit-learn models across 3 prediction domains (OPD wait-time regression, inventory stockout classification + demand-depletion regression, and billing profit/loss prediction), plus a rule-based engine linking live OpenWeatherMap/AQI data to medicine-demand forecasting.",
@@ -607,6 +609,8 @@ export const recognition: Recognition[] = [
   { id: "aws", title: "AWS Academy Graduate", detail: "Cloud Foundations", year: "Certified", kind: "certification" },
   { id: "aiu", title: "All India University Matches, Squash", detail: "Represented KJSIT and the University of Mumbai", year: "2025–26", kind: "sport" },
   { id: "letters", title: "Letters of Appreciation", detail: "Somaiya, for CIIA-5 and AIU Squash", year: "2025–26", kind: "letter" },
+  { id: "vanaspati-hackathon", title: "Runner-up, KJSIT Internal Hackathon", detail: "Out of 100 teams", project: "Vanaspati", year: "2026", kind: "award", webOnly: true },
+  { id: "tsec-hackathon", title: "Top 20, TSEC Hackathon", detail: "Thadomal Shahani Engineering College, Mumbai", project: "Hospital Ops Sync", year: "2026", kind: "award", webOnly: true },
   { id: "kjsit-hackathon", title: "Winner, KJSIT Campus Hackathon", detail: "One of the winning teams", year: "2025", kind: "award", webOnly: true },
   { id: "google-analytics", title: "Google Analytics Certification", detail: "Google · valid to Aug 2027", year: "2026", kind: "certification", webOnly: true },
 ];
