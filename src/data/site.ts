@@ -603,16 +603,16 @@ export const sideProjects: SideProject[] = [
 ];
 
 export const recognition: Recognition[] = [
-  { id: "iet", title: "Winner, IET Intech 2k26", detail: "National-level competition", project: "Atomix", year: "2025–26", kind: "award" },
   { id: "ciia", title: "National Innovation Showcase, CIIA-5", detail: "Nehru Science Centre, Mumbai", project: "GeoSwipe", year: "2025–26", kind: "showcase" },
+  { id: "iet", title: "Winner, IET Intech 2k26", detail: "National-level competition", project: "Atomix", year: "2025–26", kind: "award" },
   { id: "airobo", title: "Runner-up, AI-Robo Festival", detail: "Competition podium", project: "GeoSwipe", year: "2026", kind: "award" },
   { id: "aws", title: "AWS Academy Graduate", detail: "Cloud Foundations", year: "Certified", kind: "certification" },
-  { id: "aiu", title: "All India University Matches, Squash", detail: "Represented KJSIT and the University of Mumbai", year: "2025–26", kind: "sport" },
+  { id: "google-analytics", title: "Google Analytics Certification", detail: "Google · valid to Aug 2027", year: "2026", kind: "certification" },
   { id: "letters", title: "Letters of Appreciation", detail: "Somaiya, for CIIA-5 and AIU Squash", year: "2025–26", kind: "letter" },
+  { id: "aiu", title: "All India University Matches, Squash", detail: "Represented KJSIT and the University of Mumbai", year: "2025–26", kind: "sport" },
   { id: "vanaspati-hackathon", title: "Runner-up, KJSIT Internal Hackathon", detail: "Out of 100 teams", project: "Vanaspati", year: "2026", kind: "award", webOnly: true },
   { id: "tsec-hackathon", title: "Top 20, TSEC Hackathon", detail: "Thadomal Shahani Engineering College, Mumbai", project: "Hospital Ops Sync", year: "2026", kind: "award", webOnly: true },
   { id: "kjsit-hackathon", title: "Winner, KJSIT Campus Hackathon", detail: "One of the winning teams", year: "2025", kind: "award", webOnly: true },
-  { id: "google-analytics", title: "Google Analytics Certification", detail: "Google · valid to Aug 2027", year: "2026", kind: "certification", webOnly: true },
 ];
 
 export type Skill = { id: string; name: string; projects: string[] };
