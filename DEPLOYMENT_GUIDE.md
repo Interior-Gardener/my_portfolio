@@ -26,7 +26,7 @@ With both keys and both models (`openai/gpt-oss-20b`, falling back to `openai/gp
 
 ## 1. Before anything else: rotate the Groq keys
 
-The two Groq API keys were pasted into a chat conversation while building the site, so treat them as exposed.
+The two Groq API keys were shared outside the project while the site was being set up, so treat them as exposed.
 
 1. Open <https://console.groq.com/keys>.
 2. Create **two new keys**. For double the free quota, create them in **two different Groq accounts**, since limits are per account.
@@ -59,7 +59,7 @@ The PDF and `site.ts` are two separately hand-maintained documents — nothing a
 npm run resume:synced
 ```
 
-That records the new PDF's hash so the warning clears. It's a reminder, not magic — it can't tell you *what* changed, only *that* the file did, so re-read both side by side (or hand the new PDF to Claude and ask it to diff and update `site.ts`) before marking it synced.
+That records the new PDF's hash so the warning clears. It's a reminder, not magic — it can't tell you *what* changed, only *that* the file did, so re-read both side by side and update `site.ts` before marking it synced.
 
 ---
 
